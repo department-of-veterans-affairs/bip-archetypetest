@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-  
-<suite name="Default suite" verbose="1" parallel="classes" thread-count="1">
-  <test name="ArchetypeTestRunnerTest">
-    <classes>
- <class name="gov.va.bip.archetypetest.service.runner.ArchetypeTestRunner"/> 
-  </classes>
-  </test>
-</suite>
