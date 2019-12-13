@@ -24,9 +24,9 @@ mavenGitflowPipeline {
 
     // Map of Image Names to sub-directory in the repository. If this is value is non-empty, 
     // the build pipeline will build all images specified in the map. The example below will build an image tagged as 
-    // `bip-archetypetest:latest` using the Docker context of `./bip-archetypetest`.
+    // `archetypetest/bip-archetypetest:latest` using the Docker context of `./bip-archetypetest`.
     dockerBuilds = [
-        'bip-archetypetest': 'bip-archetypetest'
+        'archetypetest/bip-archetypetest': 'bip-archetypetest'
     ]
 
     /*************************************************************************
