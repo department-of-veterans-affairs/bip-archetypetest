@@ -2,10 +2,10 @@ mavenGitflowPipeline {
 
     //TODO_CMF: adding skipSonar for testing
     skipSonar = true
-    skipFortify = false
+    skipFortify = true
 
     //TODO_CMF: temporarily skip tests while testing teardown job
-    skipTests = true
+    //skipTests = true
     //skipFunctionalTests = true
     //skipPerformanceTests = true
 
