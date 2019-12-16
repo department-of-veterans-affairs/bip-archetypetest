@@ -72,7 +72,7 @@ mavenGitflowPipeline {
     //Deployment parameters used to configure your Openshift deployment template
     deploymentParameters = [
         'APP_NAME': 'bip-archetypetest',
-        'IMAGE': 'archetypetest/bip-archetypetest',
+        'IMAGE': 'bip-archetypetest',
         'SPRING_PROFILES': 'dev'
     ]
 
@@ -80,7 +80,7 @@ mavenGitflowPipeline {
     // Defaults to the value of `deploymentParameters` if not specified.
     functionalTestDeploymentParameters = [
         'APP_NAME': 'bip-archetypetest',
-        'IMAGE': 'archetypetest/bip-archetypetest',
+        'IMAGE': 'bip-archetypetest',
         'SPRING_PROFILES': 'dev'
     ]
 
@@ -88,7 +88,7 @@ mavenGitflowPipeline {
     // Defaults to the value of `deploymentParameters` if not specified.
     performanceTestDeploymentParameters = [
          'APP_NAME': 'bip-archetypetest',
-         'IMAGE': 'archetypetest/bip-archetypetest',
+         'IMAGE': 'bip-archetypetest',
          'SPRING_PROFILES': 'dev'
     ]
 
