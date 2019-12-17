@@ -1,9 +1,8 @@
 mavenGitflowPipeline {
 
-    //TODO_CMF: Test out performance improvements when using beforeAgent
     skipSonar = true
     skipFortify = true
-    skipMavenDeploy = true
+    skipMavenDeploy = false
     skipFunctionalTests = true
     skipPerformanceTests = true
 
