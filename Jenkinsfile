@@ -5,9 +5,9 @@ mavenGitflowPipeline {
     skipFortify = true
 
     //TODO_CMF: temporarily skip tests while testing teardown job
-    //skipTests = true
-    //skipFunctionalTests = true
-    //skipPerformanceTests = true
+    skipTests = true
+    skipFunctionalTests = true
+    skipPerformanceTests = true
 
     //Sonar Github Credentials - Settings this value will configure the pipeline to use this credential
     //to connect to github during sonar PR scans, adding comments for any violations found
