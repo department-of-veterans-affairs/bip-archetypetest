@@ -1,7 +1,7 @@
 mavenGitflowPipeline {
 
-    skipSonar = true
-    skipFortify = true
+    skipSonar = false
+    skipFortify = false
     skipMavenDeploy = false
     skipFunctionalTests = false
     skipPerformanceTests = false
