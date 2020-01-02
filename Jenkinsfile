@@ -100,6 +100,9 @@ mavenGitflowPipeline {
     //Git Repository that contains your Helm chart
     chartRepository = "https://github.ec.va.gov/EPMO/bip-archetypetest-config"
 
+    //Git branch to obtain Helm chart from
+    chartBranch = "development"
+
     //Path to your chart directory within the above repository
     chartPath = "charts/bip-archetypetest"
 
