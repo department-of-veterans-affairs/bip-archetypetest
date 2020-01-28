@@ -1,7 +1,7 @@
 mavenGitflowPipeline {
 
     skipSonar = true
-    skipFortify = true
+    skipFortify = false
     skipMavenDeploy = true
     skipFunctionalTests = true
     skipPerformanceTests = true
@@ -14,7 +14,7 @@ mavenGitflowPipeline {
     githubCredentials = 'epmo-github'
     
     //Specify to use the fortify maven plugin, instead of the Ant task to execute the fortify scan
-    useFortifyMavenPlugin = true
+    //useFortifyMavenPlugin = true
 
     /*************************************************************************
     * Docker Build Configuration
