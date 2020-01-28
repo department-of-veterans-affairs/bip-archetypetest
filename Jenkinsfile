@@ -14,7 +14,7 @@ mavenGitflowPipeline {
     githubCredentials = 'epmo-github'
     
     //Specify to use the fortify maven plugin, instead of the Ant task to execute the fortify scan
-    useFortifyMavenPlugin = false
+    //useFortifyMavenPlugin = false
 
     /*************************************************************************
     * Docker Build Configuration
