@@ -1,11 +1,11 @@
 @Library('jenkins-library@AF-1047') _
 mavenGitflowPipeline {
 
-    skipSonar = false
+    skipSonar = true
     skipFortify = false
-    skipMavenDeploy = false
-    skipFunctionalTests = false
-    skipPerformanceTests = false
+    skipMavenDeploy = true
+    skipFunctionalTests = true
+    skipPerformanceTests = true
 
     //Sonar Github Credentials - Settings this value will configure the pipeline to use this credential
     //to connect to github during sonar PR scans, adding comments for any violations found
@@ -15,7 +15,7 @@ mavenGitflowPipeline {
     githubCredentials = 'epmo-github'
     
     //Specify to use the fortify maven plugin, instead of the Ant task to execute the fortify scan
-    useFortifyMavenPlugin = true
+    //useFortifyMavenPlugin = false
 
     /*************************************************************************
     * Docker Build Configuration
@@ -42,7 +42,8 @@ mavenGitflowPipeline {
    
    // Set of Postman test collections to execute. Required for Postman Testing stage to run.
    postmanTestCollections = [
-     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection.json'
+     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection.json',
+     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection2.json'
    ]
 
    // Only run specified folder from collection. Optional. Runs all tests in collection if not specified
@@ -100,6 +101,9 @@ mavenGitflowPipeline {
 
     //Git Repository that contains your Helm chart
     chartRepository = "https://github.ec.va.gov/EPMO/bip-archetypetest-config"
+
+    //Git branch to obtain Helm chart from
+    chartBranch = "development"
 
     //Path to your chart directory within the above repository
     chartPath = "charts/bip-archetypetest"
