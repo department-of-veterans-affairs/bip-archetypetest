@@ -1,8 +1,8 @@
 mavenGitflowPipeline {
 
-    skipSonar = true
+    skipSonar = false
     skipFortify = false
-    skipMavenDeploy = true
+    skipMavenDeploy = false
     skipFunctionalTests = true
     skipPerformanceTests = true
 
@@ -41,8 +41,7 @@ mavenGitflowPipeline {
    
    // Set of Postman test collections to execute. Required for Postman Testing stage to run.
    postmanTestCollections = [
-     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection.json',
-     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection2.json'
+     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection.json'
    ]
 
    // Only run specified folder from collection. Optional. Runs all tests in collection if not specified
