@@ -64,8 +64,6 @@ public class ServiceAdapter {
 
 		// transform domain response into provider response
 		LOGGER.debug("Transforming from domainResponse to providerResponse");
-		SampleResponse providerResponse = sampleByPidDomain2Provider.convert(domainResponse);
-
-		return providerResponse;
+		return sampleByPidDomain2Provider.convert(domainResponse);
 	}
 }

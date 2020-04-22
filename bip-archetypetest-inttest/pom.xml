@@ -18,7 +18,7 @@
 	<description>BIP ArchetypeTest Service Integration Test Suite</description>
 	
 	<properties>
-    	<bip-framework.version>2.0.6</bip-framework.version>
+    	<bip-framework.version>2.2.0</bip-framework.version>
 	</properties>
 
 	<dependencies>

@@ -24,7 +24,7 @@ genLog="$cwd/$thisFileName.log"
 # git variables
 cgb=$(git rev-parse --abbrev-ref HEAD)
 gitRemote=""
-gitBranchBaseline="master"
+gitBranchBaseline="dev-opa-helm"
 gitBranchDb="master-db"
 bitBranchPartner="master-partner"
 
@@ -131,7 +131,7 @@ function exit_now() {
 		elif [ "$exit_code" -eq "24" ]; then
 			# One or more properties not set correctly
 			echo "ERROR: \"$propertiesFile\" has bad values for the following properties:" 2>&1 | tee -a "$genLog"
-			echo "artifactName should start with a letter and be alphanumeric." 2>&1 | tee -a "$genLog"
+			echo "artifactName should start with a capital letter and be alphanumeric." 2>&1 | tee -a "$genLog"
 			echo "artifactNameLowerCase should all be lower case." 2>&1 | tee -a "$genLog"
 			echo "artifactNameUpperCase should all be upper case." 2>&1 | tee -a "$genLog"
 			echo "        $invalidArtifactName" 2>&1 | tee -a "$genLog"
@@ -248,7 +248,7 @@ function framework_exists() {
 	frameworkVersion=`grep -m 1 "<version>" bip-archetype-service-origin/pom.xml | cut -d "<" -f2 | cut -d ">" -f2`
 	echo "+>> Checking for existence of bip-framework $frameworkVersion" 2>&1 | tee -a "$genLog"
 
-	mvn dependency:get -Dartifact=gov.va.bip.framework:bip-framework-parentpom:$frameworkVersion:pom -DremoteRepositories=https://nexus.dev.bip.va.gov/repository/maven-public 2>&1 >> "$genLog"
+	mvn dependency:get -Dartifact=gov.va.bip.framework:bip-framework-parentpom:$frameworkVersion:pom -DremoteRepositories=https://nexus.dev8.bip.va.gov/repository/maven-public 2>&1 >> "$genLog"
 	if [ "$?" -ne "0" ]; then
 		exit_now "11"
 	fi
@@ -333,9 +333,9 @@ function validate_properties() {
 	fi
 
 	invalidArtifactName=""
-	if [[ !("$artifactName" =~ ^[a-zA-Z_$]{1}[a-zA-Z0-9_$]+$) ]]; then invalidArtifactName+="artifactName "; fi
-	if [[ !("$artifactNameLowerCase" =~ ^[a-z_$]{1}[a-z0-9_$]+$) ]]; then invalidArtifactName+="artifactNameLowerCase "; fi
-	if [[ !("$artifactNameUpperCase" =~ ^[A-Z_$]{1}[A-Z0-9_$]+$) ]]; then invalidArtifactName+="artifactNameUpperCase "; fi
+	if [[ !("$artifactName" =~ ^[A-Z]{1}[a-zA-Z0-9_$]+$) ]]; then invalidArtifactName+="artifactName "; fi
+	if [[ !("$artifactNameLowerCase" =~ ^[a-z]{1}[a-z0-9_$]+$) ]]; then invalidArtifactName+="artifactNameLowerCase "; fi
+	if [[ !("$artifactNameUpperCase" =~ ^[A-Z]{1}[A-Z0-9_$]+$) ]]; then invalidArtifactName+="artifactNameUpperCase "; fi
 
 	if [[ $invalidArtifactName != "" ]]; then
 		exit_now 24
@@ -643,20 +643,20 @@ function copy_origin_project() {
 ## scope: private (internal calls only)     ##
 function prepare_origin_project() {
 	# check out the baseline branch
-	#git_checkout_branch "$gitBranchBaseline"
+	git_checkout_branch "$gitBranchBaseline"
 	# create the prep branch, put branch name in $prepBranch
-	#git_create_prep_branch "originPrep-$artifactName"
+	git_create_prep_branch "originPrep-$artifactName"
 	# git current branch is now the prep branch
 
-	#if [ ${#components[@]} -eq 0 ]; then
-	#	echo "+>> No components selected, proceeding with baseline Origin project" 2>&1 | tee -a "$genLog"
-	#else
-	#	echo "+>> Merging components \"${components[*]}\" into branch \"$prepBranch\"." 2>&1 | tee -a "$genLog"
-	#	for component in "${components[@]}"
-	#	do
-	#		git_merge_component_branch "$component"
-	#	done
-	#fi
+	if [ ${#components[@]} -eq 0 ]; then
+		echo "+>> No components selected, proceeding with baseline Origin project" 2>&1 | tee -a "$genLog"
+	else
+		echo "+>> Merging components \"${components[*]}\" into branch \"$prepBranch\"." 2>&1 | tee -a "$genLog"
+		for component in "${components[@]}"
+		do
+			git_merge_component_branch "$component"
+		done
+	fi
 	copy_origin_project
 	#build_origin
 }
@@ -847,8 +847,8 @@ get_args $args
 read_properties
 validate_properties
 remove_only
-#framework_exists
-#git_has_remote
+framework_exists
+git_has_remote
 # multiple steps carried out in prepare_origin_project...
 prepare_origin_project
 
@@ -856,6 +856,6 @@ prepare_files
 rename_directories
 rename_files
 change_text
-#build_new_project
+build_new_project
 git_delete_prep_branch
 exit_now 0

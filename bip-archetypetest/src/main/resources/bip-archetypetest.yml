@@ -190,7 +190,8 @@ bip.framework:
         - /api/v1/archetypetest/**
         - /api/v2/archetypetest/**
       excludeUrls:
-        - /**
+        - /api/v1/token
+        - /*
   swagger:
     # enable/disable the swagger/openapi UI ...
     enabled: true

@@ -73,7 +73,7 @@ public class SampleDomainResponseValidator extends AbstractStandardValidator<Sam
 			ArchetypeTestMessageKeys key = ArchetypeTestMessageKeys.BIP_SAMPLE_REQUEST_PID_INCONSISTENT;
 
 			LOGGER.info(key.getKey() + " " + key.getMessage());
-			toValidate.addMessage(MessageSeverity.WARN, HttpStatus.OK, key);
+			messages.add(new ServiceMessage(MessageSeverity.WARN, HttpStatus.OK, key));
 		}
 		// check logged in user's pid matches returned pid
 		PersonTraits personTraits = SecurityUtils.getPersonTraits();
@@ -87,7 +87,7 @@ public class SampleDomainResponseValidator extends AbstractStandardValidator<Sam
 
 			ArchetypeTestMessageKeys key = ArchetypeTestMessageKeys.BIP_SAMPLE_REQUEST_PID_INVALID;
 			LOGGER.info(key.getKey() + " " + key.getMessage());
-			toValidate.addMessage(MessageSeverity.WARN, HttpStatus.OK, key);
+			messages.add(new ServiceMessage(MessageSeverity.WARN, HttpStatus.OK, key));
 		}
 	}
 

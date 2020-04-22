@@ -78,4 +78,4 @@ mvn clean verify -Pperftest -Dprotocol=<> -Ddomain=<> -Dport=<> -DBearerTokenCre
 ```
 
 ## How to set up JMeter and Create Test Plan (JMX)
-For an example from the BIP Reference app, see [BIP Reference - Performance Testing Guide](https://github.com/department-of-veterans-affairs/bip-reference-person/tree/master/bip-reference-perftest)
+For an example from the BIP Reference app, see [BIP Reference - Performance Testing Guide](https://github.ec.va.gov/EPMO/bip-reference-person/tree/master/bip-reference-perftest)

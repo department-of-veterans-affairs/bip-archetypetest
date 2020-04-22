@@ -18,6 +18,7 @@ ADD https://github.com/stedolan/jq/releases/download/jq-${JQ_VESRION}/jq-linux64
 RUN chmod 755 /usr/bin/jq
 
 ADD vault-config.sh /vault-config.sh
+RUN chmod +x /vault-config.sh
 ADD token-policy.hcl /token-policy.hcl
 RUN mkdir -p /consul
 ADD consul /consul

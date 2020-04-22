@@ -5,13 +5,12 @@
  */
 package gov.va.bip.archetypetest.exception;
 
-import static org.junit.Assert.assertEquals;
-
+import gov.va.bip.framework.messages.MessageKeys;
+import gov.va.bip.framework.messages.MessageSeverity;
 import org.junit.Before;
 import org.junit.Test;
 
-import gov.va.bip.framework.messages.MessageKeys;
-import gov.va.bip.framework.messages.MessageSeverity;
+import static org.junit.Assert.assertEquals;
 
 /**
  *

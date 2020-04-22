@@ -1,20 +1,7 @@
 mavenGitflowPipeline {
 
-    skipSonar = false
-    skipFortify = false
-    skipMavenDeploy = false
-    skipFunctionalTests = true
-    skipPerformanceTests = true
-
-    //Sonar Github Credentials - Settings this value will configure the pipeline to use this credential
-    //to connect to github during sonar PR scans, adding comments for any violations found
-    sonarGithubCredentials = 'dsva-github'
-
-    //Github credential ID to use for releases
-    githubCredentials = 'epmo-github'
-    
     //Specify to use the fortify maven plugin, instead of the Ant task to execute the fortify scan
-    //useFortifyMavenPlugin = false
+    useFortifyMavenPlugin = true
 
     /*************************************************************************
     * Docker Build Configuration
@@ -22,7 +9,7 @@ mavenGitflowPipeline {
 
     // Map of Image Names to sub-directory in the repository. If this is value is non-empty, 
     // the build pipeline will build all images specified in the map. The example below will build an image tagged as 
-    // `bip-archetypetest:latest` using the Docker context of `./bip-archetypetest`.
+    // `archetypetest/bip-archetypetest:latest` using the Docker context of `./bip-archetypetest`.
     dockerBuilds = [
         'archetypetest/bip-archetypetest': 'bip-archetypetest'
     ]
@@ -45,49 +32,19 @@ mavenGitflowPipeline {
    ]
 
    // Only run specified folder from collection. Optional. Runs all tests in collection if not specified
-   // postmanFolder = 'smoke'
+   // postmanFolder = 'token'
 
    // Environment File. Optional
-   // postmanEnvironment = 'src/test/postman/dev.json'
+   // postmanEnvironment = 'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest-test.postman_environment.json'
 
    // Globals File. Optional.
-   // postmanGlobals = 'src/test/postman/globals.json'
+   // postmanGlobals = 'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_globals.json'
 
    // Data File. Optional.
-   // postmanData = 'src/test/postman/data.json'
+   // postmanData = 'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_data.csv'
 
-    /*************************************************************************
-    * OpenShift Deployment Configuration
-    *
-    * This section only applied to builds running on the OpenShift platform.
-    * This section should be omitted if you are using Helm for deployments on
-    * Kubernetes.
-    *************************************************************************/
-    //Path to your applications Openshift deployment template
-    deploymentTemplates = ["template.yaml"]
-    
-    //Deployment parameters used to configure your Openshift deployment template
-    deploymentParameters = [
-        'APP_NAME': 'bip-archetypetest',
-        'IMAGE': 'bip-archetypetest',
-        'SPRING_PROFILES': 'dev'
-    ]
-
-    //Functional Testing Deployment parameters used to configure your Openshift deployment template
-    // Defaults to the value of `deploymentParameters` if not specified.
-    functionalTestDeploymentParameters = [
-        'APP_NAME': 'bip-archetypetest',
-        'IMAGE': 'bip-archetypetest',
-        'SPRING_PROFILES': 'dev'
-    ]
-
-    //Performance Testing Deployment parameters used to configure your Openshift deployment template
-    // Defaults to the value of `deploymentParameters` if not specified.
-    performanceTestDeploymentParameters = [
-         'APP_NAME': 'bip-archetypetest',
-         'IMAGE': 'bip-archetypetest',
-         'SPRING_PROFILES': 'dev'
-    ]
+   // Number of Iterations to run tests. Optional.
+   // postmanIterationCount = 3
 
     /*************************************************************************
     * Helm Deployment Configuration
@@ -112,6 +69,9 @@ mavenGitflowPipeline {
     //Value YAML file used to configure the Helm deployments used for functional and performance testing.
     chartValueFunctionalTestFile = "testing.yaml"
     chartValuePerformanceTestFile = "testing.yaml"
+
+    //Value YAML file used to configure the Helm deployments used for the Deploy Review Instance stage
+    chartValueReviewInstanceFile = "reviewInstance.yaml"
 
     //Release name to use
     chartReleaseName = "bip-archetypetest"

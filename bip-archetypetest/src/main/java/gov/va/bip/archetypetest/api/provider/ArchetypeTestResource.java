@@ -65,7 +65,7 @@ public class ArchetypeTestResource implements ArchetypeTestApi, SwaggerResponseM
 	 */
 	@InitBinder
 	public void initBinder(final WebDataBinder binder) {
-		binder.setAllowedFields(new String[] { "sampleInfo", "name", "participantId" });
+		binder.setAllowedFields("sampleInfo", "name", "participantId");
 	}
 
 	/**
