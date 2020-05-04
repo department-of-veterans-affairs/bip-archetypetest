@@ -57,3 +57,21 @@ Feature: PID based SampleInfo derived from the partner service.
       | Veteran          | tokenrequestfile              | ServiceURL          | RequestFile        | Text                                           | Type                     |
       | va-janedoe       | va/janedoetoken.request       | /api/v1/archetypetest/pid | va/invalid.request | Participant ID must be greater than zero.       | application/problem+json |
       | va-russellwatson | va/russellwatsontoken.request | /api/v1/archetypetest/pid | va/null.request    | SampleInfoRequest.participantID cannot be null. | application/problem+json |
+
+  @securitypolicy
+  Scenario Outline: PID based SampleInfo from the partner service with assurance level of zero
+    Given the claimant is a "<Veteran>"
+    And invoke token API by passing header from "<tokenrequestfile>" and sets the authorization in the header
+    When client request SampleInfo "<ServiceURL>" with PID data "<RequestFile>"
+    Then the service returns status code = 403
+
+  @DEV
+    Examples:
+      | Veteran           | tokenrequestfile               | ServiceURL          | RequestFile               |
+      | dev-janedoe       | dev/zeroassuranceleveltoken.request       | /api/v1/archetypetest/pid | dev/janedoe.request       |
+
+  @VA
+    Examples:
+      | Veteran          | tokenrequestfile              | ServiceURL          | RequestFile              |
+      | va-janedoe       | va/zeroassuranceleveltoken.request       | /api/v1/archetypetest/pid | va/janedoe.request       |
+

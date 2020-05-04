@@ -9,7 +9,7 @@
     tag: latest
     pullPolicy: Always
   ingress:
-    enabled: false
+    enabled: true
   vault:
     enabled: false
     consulBackendEnabled: false
@@ -20,5 +20,8 @@
     discovery:
       enabled: false
       register: false
+  spring:
+    profiles: "ci"
   opa:
-    enabled: false
+    enabled: true # OPAEnablement: Set this to true if you want to enable OPA
+    rego: api_authz_jwt_token.rego

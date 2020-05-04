@@ -21,9 +21,12 @@ mavenGitflowPipeline {
     //Directory that contains the cucumber reports
     cucumberReportDirectory = "bip-archetypetest-inttest/target/site"
 
-    //Additional Mavn options to use when running functional test cases
+    //Additional Maven options to use when running functional test cases. By default, security policy tests are
+    // ignored, but when OPA is enabled, the subsequent line overrides the cucumberOpts to allow them to be included.
+    cucumberOpts = "--tags @DEV --tags ~@securitypolicy"
+
     cucumberOpts = "--tags @DEV"
-    
+
     /* Postman Testing Configuration */
    
    // Set of Postman test collections to execute. Required for Postman Testing stage to run.

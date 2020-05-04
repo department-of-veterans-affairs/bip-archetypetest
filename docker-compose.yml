@@ -94,7 +94,7 @@ services:
       - bip
     depends_on:
       - prometheus
-      
+
   opa:
     image: bipdev/openpolicyagent
     build:

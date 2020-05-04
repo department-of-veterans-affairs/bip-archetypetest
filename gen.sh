@@ -24,7 +24,7 @@ genLog="$cwd/$thisFileName.log"
 # git variables
 cgb=$(git rev-parse --abbrev-ref HEAD)
 gitRemote=""
-gitBranchBaseline="dev-opa-helm"
+gitBranchBaseline="master"
 gitBranchDb="master-db"
 bitBranchPartner="master-partner"
 
@@ -42,6 +42,7 @@ nexusRepoUrl=""
 frameworkVersion=""
 components=()
 prepBranch=""
+enableOPA=false
 
 ################################################################################
 #########################                              #########################
@@ -304,6 +305,8 @@ function read_properties() {
 						IFS=$tempIFS
 					fi
 				fi
+                if [[ "$theKey" == "enableOPA" ]]; then enableOPA=$theVal; fi
+
 
 			fi
 		done < "$cwd/$propertiesFile"
@@ -658,7 +661,7 @@ function prepare_origin_project() {
 		done
 	fi
 	copy_origin_project
-	#build_origin
+	build_origin
 }
 
 ## function to clean up and prepare files for new project ##
@@ -812,6 +815,18 @@ function change_text() {
 		newVal="$projectNameSpacePrefix"
 		echo "LC_ALL=C sed -i \"\" -e 's/'\"$oldVal\"'/'\"$newVal\"'/g' \"$tmpFile\"" 2>&1 | tee -a "$genLog"
 		LC_ALL=C sed -i "" -e 's/'"$oldVal"'/'"$newVal"'/g' "$tmpFile" 2>&1 >> "$genLog"
+		if [ "$enableOPA" = true ] ; then
+            oldVal="false # OPAEnablement"
+            newVal="true # OPAEnablement"
+            echo "LC_ALL=C sed -i \"\" -e 's/'\"$oldVal\"'/'\"$newVal\"'/g' \"$tmpFile\"" 2>&1 | tee -a "$genLog"
+            LC_ALL=C sed -i "" -e 's/'"$oldVal"'/'"$newVal"'/g' "$tmpFile" 2>&1 >> "$genLog"
+
+            oldVal="\/\/ OPAEnablement "
+            newVal=""
+            echo "LC_ALL=C sed -i \"\" -e 's/'\"$oldVal\"'/'\"$newVal\"'/g' \"$tmpFile\"" 2>&1 | tee -a "$genLog"
+            LC_ALL=C sed -i "" -e 's/'"$oldVal"'/'"$newVal"'/g' "$tmpFile" 2>&1 >> "$genLog"
+        fi
+
 	done;
 	### do not check exit status, as windows editions of bash mysteriously report errors, but still do the work
 	# check_exit_status "$?"
