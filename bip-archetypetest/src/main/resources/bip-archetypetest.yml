@@ -19,6 +19,22 @@ bip-archetypetest:
 spring.profiles: local-int, ci, dev, stage, prod
 spring.profiles.include: remote_client_sims
 ---
+spring.profiles: local-int, ci
+bip.framework.security.opa:
+  enabled: true # OPAEnablement: Set this to true if you want to enable OPA
+---
+spring.profiles: local-int
+bip.framework.security.opa:
+  urls:
+    - http://opa:8181/v1/data/bip/http/authz/admin
+    - http://opa:8181/v1/data/bip/http/authz/allow
+  allVotersAbstainGrantAccess: false
+---
+spring.profiles: ci
+spring:
+  cache:
+    type: simple
+---
 spring:
   cache:
     type: redis

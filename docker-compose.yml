@@ -32,6 +32,7 @@ services:
       - redis
       - vault
       - vault-config
+      - opa
 
   consul:
     image: bipdev/consul:1.4.3

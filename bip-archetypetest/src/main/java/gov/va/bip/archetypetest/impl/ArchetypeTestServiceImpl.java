@@ -75,7 +75,6 @@ public class ArchetypeTestServiceImpl implements ArchetypeTestService {
 	@CachePut(value = CacheConstants.CACHENAME_ARCHETYPETEST_SERVICE,
 			key = "#root.methodName + T(gov.va.bip.framework.cache.BipCacheUtil).createKey(#sampleDomainRequest.participantID)",
 			unless = "T(gov.va.bip.framework.cache.BipCacheUtil).checkResultConditions(#result)")
-	/* If a fallback position is possible, add attribute to @HystrixCommand: fallback="fallbackMethodName" */
 	@HystrixCommand(commandKey = "SampleFindByParticipantIDCommand",
 			ignoreExceptions = { IllegalArgumentException.class, BipException.class, BipRuntimeException.class },
             fallbackMethod = "sampleFindByParticipantIDFallBack")

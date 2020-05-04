@@ -18,7 +18,7 @@
 	<description>ArchetypeTest Service Implementation for BIP Project</description>
 
 	<properties>
-		<bip-framework.version>2.2.0</bip-framework.version>
+		<bip-framework.version>2.2.1</bip-framework.version>
 	</properties>
 
 	<dependencies>
