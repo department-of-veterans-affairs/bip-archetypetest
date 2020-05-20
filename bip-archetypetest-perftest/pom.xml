@@ -151,6 +151,25 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>com.fortify.sca.plugins.maven</groupId>
+                <artifactId>sca-maven-plugin</artifactId>
+                <version>${sca-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>fortify-sca-clean</id>
+                        <phase/>
+                    </execution>
+                    <execution>
+                        <id>fortify-sca-translate</id>
+                        <phase/>
+                    </execution>
+                    <execution>
+                        <id>fortify-sca-scan</id>
+                        <phase/>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 </project>
