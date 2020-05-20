@@ -66,12 +66,6 @@
 						<groupId>com.fortify.sca.plugins.maven</groupId>
 						<artifactId>sca-maven-plugin</artifactId>
 						<version>${sca-maven-plugin.version}</version>
-                        <configuration>
-                            <!-- run scans against all reactor projects -->
-                            <aggregate>false</aggregate>
-                            <!-- exclude inttest and perftest, as they don't go to prod -->
-                            <excludes>${user.dir}/bip-archetypetest-inttest,${user.dir}/bip-archetypetest-perftest</excludes>
-                        </configuration>
 						<executions>
 							<execution>
 								<id>fortify-sca-clean</id>
@@ -80,7 +74,7 @@
 									<goal>clean</goal>
 								</goals>
 								<configuration>
-									<aggregate>false</aggregate>
+									<aggregate>true</aggregate>
 								</configuration>
 							</execution>
 							<execution>
@@ -91,7 +85,7 @@
 								</goals>
 								<configuration>
 									<!-- run scans against all reactor projects -->
-									<aggregate>false</aggregate>
+									<aggregate>true</aggregate>
 									<!-- exclude inttest and perftest, as they don't go to prod -->
 									<excludes>${user.dir}/bip-archetypetest-inttest,${user.dir}/bip-archetypetest-perftest</excludes>
 								</configuration>
@@ -104,7 +98,7 @@
 								</goals>
 								<configuration>
 									<!-- run scans against all reactor projects -->
-									<aggregate>false</aggregate>
+									<aggregate>true</aggregate>
 									<!-- exclude inttest and perftest, as they don't go to prod -->
 									<excludes>${user.dir}/bip-archetypetest-inttest,${user.dir}/bip-archetypetest-perftest</excludes>
 								</configuration>
