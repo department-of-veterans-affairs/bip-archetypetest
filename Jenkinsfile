@@ -28,7 +28,14 @@ mavenGitflowPipeline {
                 'target_repository': 'https://container-registry.stage8.bip.va.gov',
                 'source_credential': 'docker-registry',
                 'target_credential': 'staging-docker-registry'
-            ]]],
+            ],[
+                'env':'demo',
+                'source_repository': 'https://container-registry.dev8.bip.va.gov',
+                'target_repository': 'https://container-registry.stage8.bip.va.gov',
+                'source_credential': 'docker-registry',
+                'target_credential': 'staging-docker-registry'
+              ]
+            ]],
         ]
 
     /*************************************************************************
