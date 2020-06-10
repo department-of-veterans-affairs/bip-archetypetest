@@ -17,7 +17,7 @@ bip-archetypetest:
     listOfServers: localhost:${server.port}
 ---
 spring.profiles: local-int, ci, dev, stage, prod
-spring.profiles.include: remote_client_sims, embedded-redis
+spring.profiles.include: remote_client_sims
 ---
 spring.profiles: local-int, ci
 bip.framework.security.opa:
