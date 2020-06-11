@@ -17,7 +17,7 @@ bip-archetypetest:
     listOfServers: localhost:${server.port}
 ---
 spring.profiles: local-int, ci, dev, stage, prod
-spring.profiles.include: remote_client_sims
+spring.profiles.include: remote_client_sims, embedded-redis
 ---
 spring.profiles: local-int, ci
 bip.framework.security.opa:
@@ -55,10 +55,10 @@ spring:
         # min-idle: 0   # Min number of idle connections to maintain
         # max-active: 8 # Max number of allocated connections (-1 for unlimited)
         max-wait: -1    # Max wait millis when pool is exhausted (-1 for unlimited)
-    # cluster:
+      # cluster:
       # max-redirects: # Maximum number of redirects to follow when executing commands across the cluster
       # nodes:         # Comma-separated list of "host:port" pairs to bootstrap from
-    # sentinel:
+      # sentinel:
       # master:  # Name of the Redis server
       # nodes:   # Comma-separated list of "host:port" pairs
   sleuth:
@@ -104,8 +104,8 @@ bip-archetypetest:
   propSource: internal
   password: secret
   sampleProperty: >
-                  sampleProperty___env/profile:${bip-archetypetest.env}___propSource:
-                  ${bip-archetypetest.propSource}__password:${bip-archetypetest.password}
+    sampleProperty___env/profile:${bip-archetypetest.env}___propSource:
+    ${bip-archetypetest.propSource}__password:${bip-archetypetest.password}
 #-##################################################
 # Logging Level for packages
 #-##################################################
@@ -115,14 +115,14 @@ logging:
     feign: WARN
     # Add partner logging here, example:
     #gov.va.bip.archetypetest.[partner-name].client: INFO
-#     gov.va.bip: DEBUG
+    #     gov.va.bip: DEBUG
     # Change Value to DEBUG to log all application logs
     gov.va.bip.archetypetest: INFO
     # Change Value to DEBUG to log all BIP framework logs
     gov.va.bip.framework: INFO
-#    org.apache.http: DEBUG
+    #    org.apache.http: DEBUG
     org.apache.http.impl.client: WARN
-#    org.springframework: DEBUG
+    #    org.springframework: DEBUG
     org.springframework.cache: WARN
     org.springframework.client.discovery: WARN
     org.springframework.cloud.consul: WARN
@@ -158,41 +158,41 @@ feign.hystrix.enabled: true
 hystrix:
   # set the hystrix.shareSecurityContext property to true. Doing so will auto configure an Hystrix concurrency strategy
   # plugin hook who will transfer the SecurityContext from your main thread to the one used by the Hystrix command
- shareSecurityContext: true
- # set the hystrix.wrappers.enabled property to true. Doing so will auto configure an Hystrix concurrency strategy
- # plugin hook who will transfer the RequestContextHolder from your main thread to the one used by the Hystrix command
- # CUSTOM property used conditionally to register bean and HystrixPlugins concurrency strategy
- wrappers.enabled: true
- command:
-  default:
-    metrics:
-      rollingStats:
-        # This property sets the duration of the statistical rolling window, in milliseconds.
-        # This is how long Hystrix keeps metrics for the circuit breaker to use and for publishing
-        # Default Value: 10000
-        timeInMilliseconds: 20000
-      # This property sets the time to wait, in milliseconds, between allowing health snapshots to be taken that calculate
-      # success and error percentages and affect circuit breaker status.
-      # Default Value: 500
-      healthSnapshot:
-        intervalInMilliseconds: 1000
-    circuitBreaker:
-      # This property sets the amount of time, after tripping the circuit, to reject requests
-      # before allowing attempts again to determine if the circuit should again be closed.
-      # Default Value: 5000
-      sleepWindowInMilliseconds: 5000
-      # This property sets the minimum number of requests in a rolling window that will trip the circuit.
-      # Default Value: 20
-      requestVolumeThreshold: 20
-    execution:
-      isolation:
-        # strategy: SEMAPHORE
-        thread:
-          # This property sets the time in milliseconds after which the caller will observe a timeout and
-          # walk away from the command execution. Hystrix marks the HystrixCommand as a TIMEOUT, and performs fallback
-          # logic. Note that there is configuration for turning off timeouts per-command, if that is desired (see command.timeout.enabled).
-          # Default Value: 1000
-          timeoutInMilliseconds: 20000
+  shareSecurityContext: true
+  # set the hystrix.wrappers.enabled property to true. Doing so will auto configure an Hystrix concurrency strategy
+  # plugin hook who will transfer the RequestContextHolder from your main thread to the one used by the Hystrix command
+  # CUSTOM property used conditionally to register bean and HystrixPlugins concurrency strategy
+  wrappers.enabled: true
+  command:
+    default:
+      metrics:
+        rollingStats:
+          # This property sets the duration of the statistical rolling window, in milliseconds.
+          # This is how long Hystrix keeps metrics for the circuit breaker to use and for publishing
+          # Default Value: 10000
+          timeInMilliseconds: 20000
+        # This property sets the time to wait, in milliseconds, between allowing health snapshots to be taken that calculate
+        # success and error percentages and affect circuit breaker status.
+        # Default Value: 500
+        healthSnapshot:
+          intervalInMilliseconds: 1000
+      circuitBreaker:
+        # This property sets the amount of time, after tripping the circuit, to reject requests
+        # before allowing attempts again to determine if the circuit should again be closed.
+        # Default Value: 5000
+        sleepWindowInMilliseconds: 5000
+        # This property sets the minimum number of requests in a rolling window that will trip the circuit.
+        # Default Value: 20
+        requestVolumeThreshold: 20
+      execution:
+        isolation:
+          # strategy: SEMAPHORE
+          thread:
+            # This property sets the time in milliseconds after which the caller will observe a timeout and
+            # walk away from the command execution. Hystrix marks the HystrixCommand as a TIMEOUT, and performs fallback
+            # logic. Note that there is configuration for turning off timeouts per-command, if that is desired (see command.timeout.enabled).
+            # Default Value: 1000
+            timeoutInMilliseconds: 20000
 ###############################################################################
 #Property configuration to enable or disable JWT security for the service calls
 #JWT security is enabled by default. So to disable it you have to
@@ -212,10 +212,10 @@ bip.framework:
     # enable/disable the swagger/openapi UI ...
     enabled: true
 
-##################################################
-# Feign or REST client connection timeout
-# when making inter-service or external REST calls
-##################################################
+  ##################################################
+  # Feign or REST client connection timeout
+  # when making inter-service or external REST calls
+  ##################################################
   rest:
     client:
       connectionTimeout: 30000
@@ -224,15 +224,15 @@ bip.framework:
       defaultMaxPerRoutePool: 10
       validateAfterInactivityPool: 10000
       connectionBufferSize: 4128
-##################################################
-# Cache
-##################################################
+  ##################################################
+  # Cache
+  ##################################################
   cache:
     defaultExpires: 86400 # (Seconds)
     expires:
-#     -
-#       name: Cache Name
-#       ttl:  TTL (In Seconds)
+      #     -
+      #       name: Cache Name
+      #       ttl:  TTL (In Seconds)
       -
         name: archetypetestService_@project.name@_@project.version@
         ttl: 1800
