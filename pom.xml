@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>gov.va.bip.framework</groupId>
 		<artifactId>bip-framework-parentpom</artifactId>
-		<version>2.2.1</version>
+		<version>3.0.3-RC1</version>
 		<relativePath />
 	</parent>
 
@@ -18,8 +18,6 @@
 
 	<modules>
 		<module>bip-archetypetest</module>
-		<module>bip-archetypetest-inttest</module>
-		<module>bip-archetypetest-perftest</module>
 	</modules>
 
 	<repositories>
@@ -34,7 +32,7 @@
 		<!-- intentionally using old ant-contrib because newer version doesn't work with maven-antrun-plugin -->
 		<ant-contrib.version>20020829</ant-contrib.version>
 		<!-- the maven phase to bind fortify-sca -->
-		<fortify.bind.phase>initialize</fortify.bind.phase>
+		<fortify.bind.phase>verify</fortify.bind.phase>
 		<fortify-merge-input-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-input-filepath>
 		<fortify-merge-output-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-output-filepath>
 		<!-- exclude example sources from sonar scans -->

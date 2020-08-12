@@ -43,7 +43,7 @@ mavenGitflowPipeline {
     *************************************************************************/
     
     //Directory that contains the cucumber reports
-    cucumberReportDirectory = "bip-archetypetest-inttest/target/site"
+    cucumberReportDirectory = "bip-archetypetest/target/site"
 
     //Additional Maven options to use when running functional test cases. By default, security policy tests are
     // ignored, but when OPA is enabled, the subsequent line overrides the cucumberOpts to allow them to be included.
@@ -55,20 +55,20 @@ mavenGitflowPipeline {
    
    // Set of Postman test collections to execute. Required for Postman Testing stage to run.
    postmanTestCollections = [
-     'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_collection.json'
+     'bip-archetypetest/src/inttest/resources/bip-archetypetest.postman_collection.json'
    ]
 
    // Only run specified folder from collection. Optional. Runs all tests in collection if not specified
    // postmanFolder = 'token'
 
    // Environment File. Optional
-   // postmanEnvironment = 'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest-test.postman_environment.json'
+   // postmanEnvironment = 'bip-archetypetest/src/inttest/resources/bip-archetypetest-test.postman_environment.json'
 
    // Globals File. Optional.
-   // postmanGlobals = 'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_globals.json'
+   // postmanGlobals = 'bip-archetypetest/src/inttest/resources/bip-archetypetest.postman_globals.json'
 
    // Data File. Optional.
-   // postmanData = 'bip-archetypetest-inttest/src/inttest/resources/bip-archetypetest.postman_data.csv'
+   // postmanData = 'bip-archetypetest/src/inttest/resources/bip-archetypetest.postman_data.csv'
 
    // Number of Iterations to run tests. Optional.
    // postmanIterationCount = 3

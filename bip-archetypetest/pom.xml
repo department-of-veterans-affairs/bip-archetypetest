@@ -18,7 +18,38 @@
 	<description>ArchetypeTest Service Implementation for BIP Project</description>
 
 	<properties>
-		<bip-framework.version>2.2.1</bip-framework.version>
+		<bip-framework.version>3.0.3-RC1</bip-framework.version>
+		<domain>localhost</domain>
+		<port>8080</port>
+		<protocol>http</protocol>
+		<Health.threadGroup.threads>5</Health.threadGroup.threads>
+		<Health.threadGroup.rampUp>2</Health.threadGroup.rampUp>
+		<Health.threadGroup.loopCount>10</Health.threadGroup.loopCount>
+		<Health.threadGroup.duration>200</Health.threadGroup.duration>
+		<Health.threadGroup.startUpDelay>5</Health.threadGroup.startUpDelay>
+		<SampleInfo.threadGroup.threads>5</SampleInfo.threadGroup.threads>
+		<SampleInfo.threadGroup.rampUp>2</SampleInfo.threadGroup.rampUp>
+		<SampleInfo.threadGroup.loopCount>10</SampleInfo.threadGroup.loopCount>
+		<SampleInfo.threadGroup.duration>200</SampleInfo.threadGroup.duration>
+		<SampleInfo.threadGroup.startUpDelay>5</SampleInfo.threadGroup.startUpDelay>
+		<SampleInfoNoRecordFound.threadGroup.threads>5</SampleInfoNoRecordFound.threadGroup.threads>
+		<SampleInfoNoRecordFound.threadGroup.rampUp>2</SampleInfoNoRecordFound.threadGroup.rampUp>
+		<SampleInfoNoRecordFound.threadGroup.loopCount>10</SampleInfoNoRecordFound.threadGroup.loopCount>
+		<SampleInfoNoRecordFound.threadGroup.duration>200</SampleInfoNoRecordFound.threadGroup.duration>
+		<SampleInfoNoRecordFound.threadGroup.startUpDelay>5</SampleInfoNoRecordFound.threadGroup.startUpDelay>
+		<SampleInfoInvalidPid.threadGroup.threads>5</SampleInfoInvalidPid.threadGroup.threads>
+		<SampleInfoInvalidPid.threadGroup.rampUp>2</SampleInfoInvalidPid.threadGroup.rampUp>
+		<SampleInfoInvalidPid.threadGroup.loopCount>10</SampleInfoInvalidPid.threadGroup.loopCount>
+		<SampleInfoInvalidPid.threadGroup.duration>200</SampleInfoInvalidPid.threadGroup.duration>
+		<SampleInfoInvalidPid.threadGroup.startUpDelay>5</SampleInfoInvalidPid.threadGroup.startUpDelay>
+		<SampleInfoNullPid.threadGroup.threads>5</SampleInfoNullPid.threadGroup.threads>
+		<SampleInfoNullPid.threadGroup.rampUp>2</SampleInfoNullPid.threadGroup.rampUp>
+		<SampleInfoNullPid.threadGroup.loopCount>10</SampleInfoNullPid.threadGroup.loopCount>
+		<SampleInfoNullPid.threadGroup.duration>200</SampleInfoNullPid.threadGroup.duration>
+		<SampleInfoNullPid.threadGroup.startUpDelay>5</SampleInfoNullPid.threadGroup.startUpDelay>
+		<BearerTokenCreate.threadGroup.threads>5</BearerTokenCreate.threadGroup.threads>
+		<BearerTokenCreate.threadGroup.rampUp>1</BearerTokenCreate.threadGroup.rampUp>
+		<BearerTokenCreate.threadGroup.loopCount>1</BearerTokenCreate.threadGroup.loopCount>
 	</properties>
 
 	<dependencies>
@@ -150,6 +181,12 @@
 			<artifactId>json-path</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>gov.va.bip.framework</groupId>
+			<artifactId>bip-framework-test-lib</artifactId>
+			<version>${bip-framework.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -209,6 +246,22 @@
 	</build>
 
 	<profiles>
+        <profile>
+            <id>inttest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 		<!-- OpenAPI Specification (OAS) Code generation profile. In the framework
 			parent pom see profile with id: org-openapitools-codegen-parent There are
 			multiple plugins in the parent POM for swagger UI download, generate. The
@@ -331,6 +384,95 @@
 											</pluginExecutionFilter>
 											<action>
 												<execute />
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<profile>
+			<id>perftest</id>
+			<build>
+				<plugins>
+					<!-- JMeter Maven Plugin to set performance test -D parameters-->
+					<plugin>
+						<groupId>com.lazerycode.jmeter</groupId>
+						<artifactId>jmeter-maven-plugin</artifactId>
+						<configuration>
+							<skip>${skipPerfTests}</skip>
+						</configuration>
+						<executions>
+							<execution>
+								<id>jmeter-configuration</id>
+								<goals>
+									<goal>configure</goal>
+								</goals>
+								<configuration>
+									<propertiesUser>
+										<baseurl>${domain}</baseurl>
+										<domain>${domain}</domain>
+										<port>${port}</port>
+										<protocol>${protocol}</protocol>
+										<Health.threadGroup.threads>${Health.threadGroup.threads}</Health.threadGroup.threads>
+										<Health.threadGroup.rampUp>${Health.threadGroup.rampUp}</Health.threadGroup.rampUp>
+										<Health.threadGroup.loopCount>${Health.threadGroup.loopCount}</Health.threadGroup.loopCount>
+										<Health.threadGroup.duration>${Health.threadGroup.duration}</Health.threadGroup.duration>
+										<Health.threadGroup.startUpDelay>${Health.threadGroup.startUpDelay}</Health.threadGroup.startUpDelay>
+										<SampleInfo.threadGroup.threads>${SampleInfo.threadGroup.threads}</SampleInfo.threadGroup.threads>
+										<SampleInfo.threadGroup.rampUp>${SampleInfo.threadGroup.rampUp}</SampleInfo.threadGroup.rampUp>
+										<SampleInfo.threadGroup.loopCount>${SampleInfo.threadGroup.loopCount}</SampleInfo.threadGroup.loopCount>
+										<SampleInfo.threadGroup.duration>${SampleInfo.threadGroup.duration}</SampleInfo.threadGroup.duration>
+										<SampleInfo.threadGroup.startUpDelay>${SampleInfo.threadGroup.startUpDelay}</SampleInfo.threadGroup.startUpDelay>
+										<SampleInfoNoRecordFound.threadGroup.threads>${SampleInfoNoRecordFound.threadGroup.threads}</SampleInfoNoRecordFound.threadGroup.threads>
+										<SampleInfoNoRecordFound.threadGroup.rampUp>${SampleInfoNoRecordFound.threadGroup.rampUp}</SampleInfoNoRecordFound.threadGroup.rampUp>
+										<SampleInfoNoRecordFound.threadGroup.loopCount>${SampleInfoNoRecordFound.threadGroup.loopCount}</SampleInfoNoRecordFound.threadGroup.loopCount>
+										<SampleInfoNoRecordFound.threadGroup.duration>${SampleInfoNoRecordFound.threadGroup.duration}</SampleInfoNoRecordFound.threadGroup.duration>
+										<SampleInfoNoRecordFound.threadGroup.startUpDelay>${SampleInfoNoRecordFound.threadGroup.startUpDelay}</SampleInfoNoRecordFound.threadGroup.startUpDelay>
+										<SampleInfoInvalidPid.threadGroup.threads>${SampleInfoInvalidPid.threadGroup.threads}</SampleInfoInvalidPid.threadGroup.threads>
+										<SampleInfoInvalidPid.threadGroup.rampUp>${SampleInfoInvalidPid.threadGroup.rampUp}</SampleInfoInvalidPid.threadGroup.rampUp>
+										<SampleInfoInvalidPid.threadGroup.loopCount>${SampleInfoInvalidPid.threadGroup.loopCount}</SampleInfoInvalidPid.threadGroup.loopCount>
+										<SampleInfoInvalidPid.threadGroup.duration>${SampleInfoInvalidPid.threadGroup.duration}</SampleInfoInvalidPid.threadGroup.duration>
+										<SampleInfoInvalidPid.threadGroup.startUpDelay>${SampleInfoInvalidPid.threadGroup.startUpDelay}</SampleInfoInvalidPid.threadGroup.startUpDelay>
+										<SampleInfoNullPid.threadGroup.threads>${SampleInfoNullPid.threadGroup.threads}</SampleInfoNullPid.threadGroup.threads>
+										<SampleInfoNullPid.threadGroup.rampUp>${SampleInfoNullPid.threadGroup.rampUp}</SampleInfoNullPid.threadGroup.rampUp>
+										<SampleInfoNullPid.threadGroup.loopCount>${SampleInfoNullPid.threadGroup.loopCount}</SampleInfoNullPid.threadGroup.loopCount>
+										<SampleInfoNullPid.threadGroup.duration>${SampleInfoNullPid.threadGroup.duration}</SampleInfoNullPid.threadGroup.duration>
+										<SampleInfoNullPid.threadGroup.startUpDelay>${SampleInfoNullPid.threadGroup.startUpDelay}</SampleInfoNullPid.threadGroup.startUpDelay>
+										<BearerTokenCreate.threadGroup.threads>${BearerTokenCreate.threadGroup.threads}</BearerTokenCreate.threadGroup.threads>
+										<BearerTokenCreate.threadGroup.rampUp>${BearerTokenCreate.threadGroup.rampUp}</BearerTokenCreate.threadGroup.rampUp>
+										<BearerTokenCreate.threadGroup.loopCount>${BearerTokenCreate.threadGroup.loopCount}</BearerTokenCreate.threadGroup.loopCount>
+									</propertiesUser>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>${lifecycle.mapping.version}</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>com.lazerycode.jmeter</groupId>
+												<artifactId>jmeter-maven-plugin</artifactId>
+												<versionRange>${jmeter-maven-plugin.versionRange}</versionRange>
+												<goals>
+													<goal>configure</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
 											</action>
 										</pluginExecution>
 									</pluginExecutions>
