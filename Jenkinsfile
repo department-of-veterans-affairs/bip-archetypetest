@@ -1,5 +1,14 @@
 mavenGitflowPipeline {
 
+    //TODO_CMF: commenting out unneeded stages while testing AF-1490
+    useBranchNameTag = false
+    skipTests = true
+    skipFunctionalTests = true
+    skipPerformanceTests = true
+    skipSonar = true
+    skipFortify = true
+    skipTwistlock = true
+
     //Specify to use the fortify maven plugin, instead of the Ant task to execute the fortify scan
     useFortifyMavenPlugin = true
 
