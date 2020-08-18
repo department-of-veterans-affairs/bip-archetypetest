@@ -1,7 +1,7 @@
 mavenGitflowPipeline {
 
     //TODO_CMF: skipping unneeded stages while testing AF-1490
-    useBranchNameTag = false
+    useBranchNameTag = true
     skipTests = true
     skipFunctionalTests = true
     skipPerformanceTests = true
