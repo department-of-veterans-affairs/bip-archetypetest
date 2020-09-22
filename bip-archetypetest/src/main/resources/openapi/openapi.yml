@@ -13,6 +13,8 @@ tags:
     description: ArchetypeTest Resource
   - name: token-resource
     description: Token Resource
+  - name: reference-person-discovery-client
+    description: Consul Discovery Client Reference Person Resource
 paths:
   "/api/v1/archetypetest/pid":
     post:
@@ -46,6 +48,34 @@ paths:
       security:
         - bearerAuth: []
       deprecated: false
+
+  ## Consul Discovery Client Examples
+  "/api/v1/consul/discoveryClientPing":
+    get:
+      tags:
+        - reference-person-discovery-client
+      summary: Service Lookup for testing Consul Service Discovery
+      description: Will get Consul Service URL for k8s-bip-archetypetest-dev-archetypetest-dev service
+      operationId: discoveryClientPing
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/discoveryClientPingResponse'
+        '400':
+          '$ref': '#/components/responses/400'
+        '401':
+          '$ref': '#/components/responses/401'
+        '403':
+          '$ref': '#/components/responses/403'
+        '500':
+          '$ref': '#/components/responses/500'
+      security:
+        - bearerAuth: []
+      deprecated: false
+
   # The token path should not require any changes
   "/api/v1/token":
     post:
@@ -143,6 +173,15 @@ components:
             sampleInfo:
               description: The object representing the sample information
               '$ref': '#/components/schemas/SampleInfo'
+    discoveryClientPingResponse:
+      type: object
+      title: discoveryClientPingResponse
+      description: Result model for getting Service URL from Consul using Discovery Service
+      properties:
+        serviceUrl:
+          type: string
+          example: This is the resulting Consul service URL string
+          description: The resulting Consul service URL string
     # Schema objects below are from BIP Framework to be declared.
     # These objects need to be mapped in <importMappings> section
     # of openapi-generator-maven-plugin so that no code is generated
