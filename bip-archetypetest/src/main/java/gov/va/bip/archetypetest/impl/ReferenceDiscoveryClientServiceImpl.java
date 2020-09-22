@@ -40,9 +40,12 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 		DiscoveryClientPingResponse response = new DiscoveryClientPingResponse();
 		if(services.size() > 0) {
 			response.setServiceUrl(services.get(0));
-		} else {
-			response.setServiceUrl("No services found.");
 		}
+//		else {
+//			response.setServiceUrl("No services found.");
+//		}
+
+
 //		String serviceUrl;
 //		if(serviceInstances.size() > 0) {
 //			serviceUrl = serviceInstances.get(0).getUri().toString();

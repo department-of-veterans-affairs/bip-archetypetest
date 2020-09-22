@@ -22,7 +22,7 @@ public class ReferenceDiscoveryClientResource implements ReferencePersonDiscover
         return new ResponseEntity<>(refDiscoveryClientPersonService.discoveryClientPing(), HttpStatus.OK);
     }
 
-    //TODO_CMF: Determine if any of this is still necessary
+    //TODO_CMF: Determine if any of this is necessary
 //    @Autowired
 //    private DiscoveryClient discoveryClient;
 //
