@@ -1,5 +1,6 @@
 package gov.va.bip.archetypetest.impl;
 
+import gov.va.bip.archetypetest.api.model.v1.GetServiceUriResponse;
 import gov.va.bip.archetypetest.api.model.v1.GetServicesResponse;
 import gov.va.bip.framework.log.BipLogger;
 import gov.va.bip.framework.log.BipLoggerFactory;
@@ -7,6 +8,7 @@ import gov.va.bip.archetypetest.ReferenceDiscoveryClientService;
 import gov.va.bip.archetypetest.api.model.v1.DiscoveryClientPingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
@@ -34,7 +36,7 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 	private DiscoveryClient discoveryClient;
 
 	@Override
-	public DiscoveryClientPingResponse discoveryClientPing(){
+	public DiscoveryClientPingResponse discoveryClientPing() {
 		List<String> services = discoveryClient.getServices();
 		DiscoveryClientPingResponse response = new DiscoveryClientPingResponse();
 		if(services.size() > 0) {
@@ -45,11 +47,22 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 	}
 
 	@Override
-    public GetServicesResponse getServices(){
+    public GetServicesResponse getServices() {
         List<String> services = discoveryClient.getServices();
         GetServicesResponse response = new GetServicesResponse();
         if(services.size() > 0) {
             response.setServiceNames(services);
+        }
+
+        return response;
+    }
+
+    @Override
+    public GetServiceUriResponse getServiceUri(String serviceName) {
+        List<ServiceInstance> services = discoveryClient.getInstances(serviceName);
+        GetServiceUriResponse response = new GetServiceUriResponse();
+        if(services.size() > 0) {
+            response.setServiceUri(services.get(0).getUri().toString());
         }
 
         return response;
