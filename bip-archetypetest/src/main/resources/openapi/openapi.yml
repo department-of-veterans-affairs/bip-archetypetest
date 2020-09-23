@@ -76,6 +76,32 @@ paths:
         - bearerAuth: []
       deprecated: false
 
+  "/api/v1/consul/discoveryClient/getServices":
+    get:
+      tags:
+        - reference-person-discovery-client
+      summary: Service Lookup for testing Consul Service Discovery
+      description: Returns a list of all registered services from the Consul Discovery Client
+      operationId: getServices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/getServicesResponse'
+        '400':
+          '$ref': '#/components/responses/400'
+        '401':
+          '$ref': '#/components/responses/401'
+        '403':
+          '$ref': '#/components/responses/403'
+        '500':
+          '$ref': '#/components/responses/500'
+      security:
+        - bearerAuth: []
+      deprecated: false
+
   # The token path should not require any changes
   "/api/v1/token":
     post:
@@ -182,6 +208,17 @@ components:
           type: string
           example: This is the resulting Consul service URL string
           description: The resulting Consul service URL string
+    getServicesResponse:
+      type: object
+      title: getServicesResponse
+      description: Result model for getting registered services using Consul Discovery Service
+      properties:
+        serviceNames:
+          type: array
+          items:
+            type: string
+          example: This is the resulting array of Consul service names
+          description: The resulting array of Consul service names
     # Schema objects below are from BIP Framework to be declared.
     # These objects need to be mapped in <importMappings> section
     # of openapi-generator-maven-plugin so that no code is generated

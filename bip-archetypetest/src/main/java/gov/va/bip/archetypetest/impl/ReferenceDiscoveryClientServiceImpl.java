@@ -1,5 +1,6 @@
 package gov.va.bip.archetypetest.impl;
 
+import gov.va.bip.archetypetest.api.model.v1.GetServicesResponse;
 import gov.va.bip.framework.log.BipLogger;
 import gov.va.bip.framework.log.BipLoggerFactory;
 import gov.va.bip.archetypetest.ReferenceDiscoveryClientService;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Implementation class for the Reference Person Service to demonstrate AWS SQS capabilities of the BLUE Framework.
+ * Implementation class for the Reference Person Service to demonstrate Consul Service Discovery of the BLUE Framework.
  */
 @Service(value = ReferenceDiscoveryClientServiceImpl.BEAN_NAME)
 @Component
@@ -34,28 +35,23 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 
 	@Override
 	public DiscoveryClientPingResponse discoveryClientPing(){
-		//TODO_CMF: Commenting out for now. Going to test getServices method.
-//		List<ServiceInstance> serviceInstances = discoveryClient.getInstances("bip-archetypetest");
 		List<String> services = discoveryClient.getServices();
 		DiscoveryClientPingResponse response = new DiscoveryClientPingResponse();
 		if(services.size() > 0) {
 			response.setServiceUrl(services.get(0));
 		}
-//		else {
-//			response.setServiceUrl("No services found.");
-//		}
-
-
-//		String serviceUrl;
-//		if(serviceInstances.size() > 0) {
-//			serviceUrl = serviceInstances.get(0).getUri().toString();
-//		} else {
-//			serviceUrl = "Service instance bip-archetypetest not found";
-//		}
-//
-//		response.setServiceUrl(serviceUrl.toString());
-
 
 		return response;
 	}
+
+	@Override
+    public GetServicesResponse getServices(){
+        List<String> services = discoveryClient.getServices();
+        GetServicesResponse response = new GetServicesResponse();
+        if(services.size() > 0) {
+            response.setServiceNames(services);
+        }
+
+        return response;
+    }
 }
