@@ -34,27 +34,11 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 
 	@Override
 	public DiscoveryClientPingResponse discoveryClientPing(){
-		//TODO_CMF: Commenting out for now. Going to test getServices method.
-//		List<ServiceInstance> serviceInstances = discoveryClient.getInstances("bip-archetypetest");
 		List<String> services = discoveryClient.getServices();
 		DiscoveryClientPingResponse response = new DiscoveryClientPingResponse();
 		if(services.size() > 0) {
 			response.setServiceUrl(services.get(0));
 		}
-//		else {
-//			response.setServiceUrl("No services found.");
-//		}
-
-
-//		String serviceUrl;
-//		if(serviceInstances.size() > 0) {
-//			serviceUrl = serviceInstances.get(0).getUri().toString();
-//		} else {
-//			serviceUrl = "Service instance bip-archetypetest not found";
-//		}
-//
-//		response.setServiceUrl(serviceUrl.toString());
-
 
 		return response;
 	}

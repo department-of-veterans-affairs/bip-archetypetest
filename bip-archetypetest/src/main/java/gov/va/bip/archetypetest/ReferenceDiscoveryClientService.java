@@ -10,10 +10,4 @@ public interface ReferenceDiscoveryClientService {
 
 	DiscoveryClientPingResponse discoveryClientPing();
 
-//	BipListQueuesResult listQueues(String queueNamePrefix);
-//
-//	BipSendMessageResult sendMessage(String queueName, String messageBody);
-//
-//	BipReceiveMessagesResult receiveMessages(String queueName);
-
 }

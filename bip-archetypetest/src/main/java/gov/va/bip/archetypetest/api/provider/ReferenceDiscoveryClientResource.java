@@ -22,47 +22,4 @@ public class ReferenceDiscoveryClientResource implements ReferencePersonDiscover
         return new ResponseEntity<>(refDiscoveryClientPersonService.discoveryClientPing(), HttpStatus.OK);
     }
 
-    //TODO_CMF: Determine if any of this is necessary
-//    @Autowired
-//    private DiscoveryClient discoveryClient;
-//
-//    @Autowired
-//    private RestTemplate restTemplate = new RestTemplate();
-//
-//    @Autowired
-//    private RestClientTemplate discoveryClientRestTemplate;
-//
-//    public Optional<URI> serviceUrl() {
-//        return discoveryClient.getInstances("k8s-bip-archetypetest-dev-archetypetest-dev")
-//                .stream()
-//                .findFirst()
-//                .map(si -> si.getUri());
-//
-////        List<ServiceInstance> list = discoveryClient.getInstances("k8s-bip-archetypetest-dev-archetypetest-dev");
-////        if (list != null && list.size() > 0 ) {
-////            return list.get(0).getUri();
-////        }
-////        return null;
-//    }
-//
-//    @GetMapping("/discoveryClient")
-//    public String discoveryPing() throws RestClientException, ServiceUnavailableException {
-//        URI service = serviceUrl()
-//                .map(s -> s.resolve("/ping"))
-//                .orElseThrow(ServiceUnavailableException::new);
-//        return restTemplate.getForEntity(service, String.class)
-//                .getBody();
-////        return discoveryClientRestTemplate.executeURL(service, HttpEntity)
-//    }
-//
-//    @GetMapping("/ping")
-//    public String ping() {
-//        return "pong";
-//    }
-//
-//    @Bean
-//    @LoadBalanced
-//    public RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
 }
