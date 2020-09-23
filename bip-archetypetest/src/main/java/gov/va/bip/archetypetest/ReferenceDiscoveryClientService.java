@@ -1,6 +1,7 @@
 package gov.va.bip.archetypetest;
 
 import gov.va.bip.archetypetest.api.model.v1.DiscoveryClientPingResponse;
+import gov.va.bip.archetypetest.api.model.v1.GetServiceUriResponse;
 import gov.va.bip.archetypetest.api.model.v1.GetServicesResponse;
 
 /**
@@ -12,4 +13,7 @@ public interface ReferenceDiscoveryClientService {
 	DiscoveryClientPingResponse discoveryClientPing();
 
 	GetServicesResponse getServices();
+
+	GetServiceUriResponse getServiceUri(String serviceName);
+
 }
