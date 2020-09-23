@@ -21,30 +21,6 @@ mavenGitflowPipeline {
     dockerBuilds = [
         'archetypetest/bip-archetypetest': 'bip-archetypetest'
     ]
-    
-     branchToDeployEnvMap = [
-            'master': ['lower':['test'],'upper':[[
-                'env':'uat',
-                'source_repository': 'https://container-registry.dev8.bip.va.gov',
-                'target_repository': 'https://container-registry.stage8.bip.va.gov',
-                'source_credential': 'docker-registry',
-                'target_credential': 'staging-docker-registry'
-            ]]],
-            'development': ['lower':['dev'],'upper':[[
-                'env':'ivv',
-                'source_repository': 'https://container-registry.dev8.bip.va.gov',
-                'target_repository': 'https://container-registry.stage8.bip.va.gov',
-                'source_credential': 'docker-registry',
-                'target_credential': 'staging-docker-registry'
-            ],[
-                'env':'demo',
-                'source_repository': 'https://container-registry.dev8.bip.va.gov',
-                'target_repository': 'https://container-registry.stage8.bip.va.gov',
-                'source_credential': 'docker-registry',
-                'target_credential': 'staging-docker-registry'
-              ]
-            ]],
-        ]
 
     /*************************************************************************
     * Functional Testing Configuration
