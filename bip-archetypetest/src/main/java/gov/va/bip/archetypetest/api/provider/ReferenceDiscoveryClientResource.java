@@ -1,6 +1,6 @@
 package gov.va.bip.archetypetest.api.provider;
 
-import gov.va.bip.archetypetest.api.model.v1.GetServiceUriResponse;
+import gov.va.bip.archetypetest.api.model.v1.GetServiceInstancesResponse;
 import gov.va.bip.archetypetest.api.model.v1.GetServicesResponse;
 import gov.va.bip.framework.swagger.SwaggerResponseMessages;
 import gov.va.bip.archetypetest.ReferenceDiscoveryClientService;
@@ -30,8 +30,8 @@ public class ReferenceDiscoveryClientResource implements ReferencePersonDiscover
     }
 
     @Override
-    public ResponseEntity<GetServiceUriResponse> getServiceUri(String serviceName) {
-        return new ResponseEntity<>(refDiscoveryClientPersonService.getServiceUri(serviceName), HttpStatus.OK);
+    public ResponseEntity<GetServiceInstancesResponse> getServiceInstances() {
+        return new ResponseEntity<>(refDiscoveryClientPersonService.getServiceInstances(), HttpStatus.OK);
     }
 
 }

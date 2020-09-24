@@ -1,6 +1,6 @@
 package gov.va.bip.archetypetest.impl;
 
-import gov.va.bip.archetypetest.api.model.v1.GetServiceUriResponse;
+import gov.va.bip.archetypetest.api.model.v1.GetServiceInstancesResponse;
 import gov.va.bip.archetypetest.api.model.v1.GetServicesResponse;
 import gov.va.bip.framework.log.BipLogger;
 import gov.va.bip.framework.log.BipLoggerFactory;
@@ -65,21 +65,22 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
     }
 
     @Override
-    public GetServiceUriResponse getServiceUri(String serviceName) {
-//        List<ServiceInstance> serviceInstances = null;
-//        serviceInstances = discoveryClient.getInstances(serviceName);
-//        GetServiceUriResponse response = new GetServiceUriResponse();
-//        if(serviceInstances.size() > 0) {
-//            response.setServiceUri(serviceInstances.get(0).getInstanceId());
-//        }
-//        else {
-//            //TODO_CMF: Hard coded response for testing.
-//            response.setServiceUri("No service Instances found.");
-//        }
-//
-//        return response;
-        GetServiceUriResponse testResponse = new GetServiceUriResponse();
-        testResponse.setServiceUri("This is a test");
-        return testResponse;
+    public GetServiceInstancesResponse getServiceInstances() {
+	    List<ServiceInstance> serviceInstances = discoveryClient.getInstances(discoveryClient.getServices().get(0));
+	    GetServiceInstancesResponse response = new GetServiceInstancesResponse();
+	    if(serviceInstances.size() > 0) {
+	        for (int i = 0; i < serviceInstances.size(); i++) {
+				gov.va.bip.archetypetest.api.model.v1.ServiceInstance curInstance = new gov.va.bip.archetypetest.api.model.v1.ServiceInstance();
+				curInstance.setServiceId(serviceInstances.get(i).getServiceId());
+				curInstance.setInstanceId(serviceInstances.get(i).getInstanceId());
+				curInstance.setUri(serviceInstances.get(i).getUri().toString());
+				curInstance.setHost(serviceInstances.get(i).getHost());
+				curInstance.setPort(serviceInstances.get(i).getPort());
+				curInstance.setIsSecure(serviceInstances.get(i).isSecure());
+				response.addServiceInstancesItem(curInstance);
+            }
+        }
+
+	    return response;
     }
 }
