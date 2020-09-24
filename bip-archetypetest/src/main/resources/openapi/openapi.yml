@@ -109,7 +109,6 @@ paths:
           required: true
           schema:
             type: string
-            format: uri
             example: k8s-bip-archetypetest-dev-archetypetest-dev
             description: The Consul Service to retrieve data from.
             minimum: 1

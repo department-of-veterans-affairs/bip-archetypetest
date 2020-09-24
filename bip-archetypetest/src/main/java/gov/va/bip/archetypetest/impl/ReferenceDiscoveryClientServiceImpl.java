@@ -59,7 +59,13 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 
     @Override
     public GetServiceUriResponse getServiceUri(String serviceName) {
-        List<ServiceInstance> serviceInstances = discoveryClient.getInstances(serviceName);
+        List<ServiceInstance> serviceInstances = null;
+        try {
+            serviceInstances = discoveryClient.getInstances(serviceName);
+        } catch(Exception e) {
+            System.out.println("discoveryClient.getInstances failed.");
+            System.out.println(e.getMessage());
+        }
         GetServiceUriResponse response = new GetServiceUriResponse();
         if(serviceInstances.size() > 0) {
             response.setServiceUri(serviceInstances.get(0).getUri().toString());
