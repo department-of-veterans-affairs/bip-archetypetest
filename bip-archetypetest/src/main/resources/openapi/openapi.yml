@@ -50,37 +50,12 @@ paths:
       deprecated: false
 
   ## Consul Discovery Client Examples
-  "/api/v1/consul/discoveryClientPing":
-    get:
-      tags:
-        - reference-person-discovery-client
-      summary: Service Lookup for testing Consul Service Discovery
-      description: Will get Consul Service URL for k8s-bip-archetypetest-dev-archetypetest-dev service
-      operationId: discoveryClientPing
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                '$ref': '#/components/schemas/discoveryClientPingResponse'
-        '400':
-          '$ref': '#/components/responses/400'
-        '401':
-          '$ref': '#/components/responses/401'
-        '403':
-          '$ref': '#/components/responses/403'
-        '500':
-          '$ref': '#/components/responses/500'
-      security:
-        - bearerAuth: []
-      deprecated: false
   "/api/v1/consul/discoveryClient/getServices":
     get:
       tags:
         - reference-person-discovery-client
-      summary: Service Lookup for testing Consul Service Discovery
-      description: Returns a list of all registered services from the Consul Discovery Client
+      summary: Retrieves all registered services from the Consul Discovery Client.
+      description: Returns a list of the names of all registered services from the Consul Discovery Client.
       operationId: getServices
       responses:
         '200':
@@ -113,8 +88,8 @@ paths:
             description: The Service to retrieve Service Instances from.
       tags:
         - reference-person-discovery-client
-      summary: Service Lookup for testing Consul Service Discovery
-      description: Returns a list of all service instances for the given service id from the Consul Discovery Client
+      summary: Retrieves service instance data for the desired service from the Consul Discovery Client.
+      description: Returns a list of all service instances for the given service id from the Consul Discovery Client.
       operationId: getServiceInstances
       responses:
         '200':
@@ -231,15 +206,6 @@ components:
             sampleInfo:
               description: The object representing the sample information
               '$ref': '#/components/schemas/SampleInfo'
-    discoveryClientPingResponse:
-      type: object
-      title: discoveryClientPingResponse
-      description: Result model for getting Service URL from Consul using Discovery Service
-      properties:
-        serviceUrl:
-          type: string
-          example: This is the resulting Consul service URL string
-          description: The resulting Consul service URL string
     getServicesResponse:
       type: object
       title: getServicesResponse
