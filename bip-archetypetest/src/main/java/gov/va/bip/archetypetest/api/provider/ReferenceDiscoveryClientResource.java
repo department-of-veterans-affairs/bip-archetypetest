@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Min;
+
 @RestController
 public class ReferenceDiscoveryClientResource implements ReferencePersonDiscoveryClientApi, SwaggerResponseMessages {
 
@@ -30,7 +32,7 @@ public class ReferenceDiscoveryClientResource implements ReferencePersonDiscover
     }
 
     @Override
-    public ResponseEntity<GetServiceInstancesResponse> getServiceInstances(String serviceId) {
+    public ResponseEntity<GetServiceInstancesResponse> getServiceInstances(@Min(1) final String serviceId) {
         return new ResponseEntity<>(refDiscoveryClientPersonService.getServiceInstances(serviceId), HttpStatus.OK);
     }
 
