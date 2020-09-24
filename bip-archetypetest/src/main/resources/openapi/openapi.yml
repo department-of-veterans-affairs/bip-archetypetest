@@ -100,31 +100,20 @@ paths:
       security:
         - bearerAuth: []
       deprecated: false
-  "/api/v1/consul/discoveryClient/{serviceName}/getServiceUri":
+  "/api/v1/consul/discoveryClient/getServiceInstances":
     get:
-      parameters:
-        - name: serviceName
-          in: path
-          description: Name of a registered Consul service.
-          required: true
-          schema:
-            type: string
-            example: k8s-bip-archetypetest-dev-archetypetest-dev
-            description: The Consul Service to retrieve data from.
-            minimum: 1
-            exclusiveMinimum: false
       tags:
         - reference-person-discovery-client
       summary: Service Lookup for testing Consul Service Discovery
-      description: Returns the uri of a registered service from the Consul Discovery Client
-      operationId: getServiceUri
+      description: Returns a list of all service instances for the given service id from the Consul Discovery Client
+      operationId: getServiceInstances
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                '$ref': '#/components/schemas/getServiceUriResponse'
+                '$ref': '#/components/schemas/getServiceInstancesResponse'
         '400':
           '$ref': '#/components/responses/400'
         '401':
@@ -253,15 +242,34 @@ components:
             type: string
           example: This is the resulting array of Consul service names
           description: The resulting array of Consul service names
-    getServiceUriResponse:
+    getServiceInstancesResponse:
       type: object
-      title: getServiceUriResponse
-      description: Result model for getting Service URI from Consul using Discovery Service
+      title: getServiceInstancesResponse
+      description: Result model for getting service instances from a desired service using Consul Discovery Service
       properties:
-        serviceUri:
+        serviceInstances:
+          type: array
+          items:
+            '$ref': '#/components/schemas/ServiceInstance'
+          example: This is the resulting array of Consul service instances
+          description: The resulting array of Consul service instances
+    ServiceInstance:
+      type: object
+      title: ServiceInstance
+      description: Result model of Service Instance data.
+      properties:
+        serviceId:
           type: string
-          example: This is the resulting Consul service uri string
-          description: The resulting Consul service uri string
+        instanceId:
+          type: string
+        uri:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+        isSecure:
+          type: boolean
     # Schema objects below are from BIP Framework to be declared.
     # These objects need to be mapped in <importMappings> section
     # of openapi-generator-maven-plugin so that no code is generated
