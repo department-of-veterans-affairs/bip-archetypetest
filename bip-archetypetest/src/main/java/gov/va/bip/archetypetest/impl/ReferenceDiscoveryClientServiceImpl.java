@@ -5,7 +5,6 @@ import gov.va.bip.archetypetest.api.model.v1.GetServicesResponse;
 import gov.va.bip.framework.log.BipLogger;
 import gov.va.bip.framework.log.BipLoggerFactory;
 import gov.va.bip.archetypetest.ReferenceDiscoveryClientService;
-import gov.va.bip.archetypetest.api.model.v1.DiscoveryClientPingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
@@ -34,24 +33,6 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 
 	@Autowired
 	private DiscoveryClient discoveryClient;
-
-	@Override
-	public DiscoveryClientPingResponse discoveryClientPing() {
-		List<String> services = discoveryClient.getServices();
-		DiscoveryClientPingResponse response = new DiscoveryClientPingResponse();
-//		if(services.size() > 0) {
-//			response.setServiceUrl(services.get(0));
-//		}
-        //TODO_CMF: Refactoring discoveryClientPing endpoint to test discoveryClient.getInstances()
-        List<ServiceInstance> serviceInstances = discoveryClient.getInstances(services.get(0));
-		if(serviceInstances.size() > 0) {
-            response.setServiceUrl(serviceInstances.get(0).toString());
-        } else {
-		    response.setServiceUrl("No service instances found.");
-        }
-
-		return response;
-	}
 
 	@Override
     public GetServicesResponse getServices() {
