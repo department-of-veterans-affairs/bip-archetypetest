@@ -39,9 +39,16 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
 	public DiscoveryClientPingResponse discoveryClientPing() {
 		List<String> services = discoveryClient.getServices();
 		DiscoveryClientPingResponse response = new DiscoveryClientPingResponse();
-		if(services.size() > 0) {
-			response.setServiceUrl(services.get(0));
-		}
+//		if(services.size() > 0) {
+//			response.setServiceUrl(services.get(0));
+//		}
+        //TODO_CMF: Refactoring discoveryClientPing endpoint to test discoveryClient.getInstances()
+        List<ServiceInstance> serviceInstances = discoveryClient.getInstances(services.get(0));
+		if(serviceInstances.size() > 0) {
+            response.setServiceUrl(serviceInstances.get(0).toString());
+        } else {
+		    response.setServiceUrl("No service instances found.");
+        }
 
 		return response;
 	}
