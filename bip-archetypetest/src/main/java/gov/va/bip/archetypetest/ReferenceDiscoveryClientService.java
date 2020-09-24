@@ -14,5 +14,5 @@ public interface ReferenceDiscoveryClientService {
 
 	GetServicesResponse getServices();
 
-	GetServiceInstancesResponse getServiceInstances();
+	GetServiceInstancesResponse getServiceInstances(String serviceId);
 }
