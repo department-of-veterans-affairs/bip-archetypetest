@@ -100,8 +100,19 @@ paths:
       security:
         - bearerAuth: []
       deprecated: false
-  "/api/v1/consul/discoveryClient/getServiceInstances":
+  "/api/v1/consul/discoveryClient/getServiceInstances/{serviceId}":
     get:
+      parameters:
+        - name: serviceId
+          in: path
+          description: service id
+          required: true
+          schema:
+            type: string
+            example: k8s-bip-archetypetest-dev-archetypetest-dev
+            description: The Service to retrieve Service Instances from.
+            minimum: 1
+            exclusiveMinimum: false
       tags:
         - reference-person-discovery-client
       summary: Service Lookup for testing Consul Service Discovery

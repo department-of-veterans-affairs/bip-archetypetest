@@ -30,8 +30,8 @@ public class ReferenceDiscoveryClientResource implements ReferencePersonDiscover
     }
 
     @Override
-    public ResponseEntity<GetServiceInstancesResponse> getServiceInstances() {
-        return new ResponseEntity<>(refDiscoveryClientPersonService.getServiceInstances(), HttpStatus.OK);
+    public ResponseEntity<GetServiceInstancesResponse> getServiceInstances(String serviceId) {
+        return new ResponseEntity<>(refDiscoveryClientPersonService.getServiceInstances(serviceId), HttpStatus.OK);
     }
 
 }

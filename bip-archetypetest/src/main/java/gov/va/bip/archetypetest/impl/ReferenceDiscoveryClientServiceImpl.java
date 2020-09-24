@@ -65,7 +65,7 @@ public class ReferenceDiscoveryClientServiceImpl implements ReferenceDiscoveryCl
     }
 
     @Override
-    public GetServiceInstancesResponse getServiceInstances() {
+    public GetServiceInstancesResponse getServiceInstances(String serviceId) {
 	    List<ServiceInstance> serviceInstances = discoveryClient.getInstances(discoveryClient.getServices().get(0));
 	    GetServiceInstancesResponse response = new GetServiceInstancesResponse();
 	    if(serviceInstances.size() > 0) {
