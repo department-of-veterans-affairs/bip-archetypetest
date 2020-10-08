@@ -13,8 +13,6 @@ tags:
     description: ArchetypeTest Resource
   - name: token-resource
     description: Token Resource
-  - name: reference-person-discovery-client
-    description: Consul Discovery Client Reference Person Resource
 paths:
   "/api/v1/archetypetest/pid":
     post:
@@ -49,66 +47,6 @@ paths:
         - bearerAuth: []
       deprecated: false
 
-  ## Consul Discovery Client Examples
-  "/api/v1/consul/discoveryClient/getServices":
-    get:
-      tags:
-        - reference-person-discovery-client
-      summary: Retrieves all registered services from the Consul Discovery Client.
-      description: Returns a list of the names of all registered services from the Consul Discovery Client.
-      operationId: getServices
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                '$ref': '#/components/schemas/getServicesResponse'
-        '400':
-          '$ref': '#/components/responses/400'
-        '401':
-          '$ref': '#/components/responses/401'
-        '403':
-          '$ref': '#/components/responses/403'
-        '500':
-          '$ref': '#/components/responses/500'
-      security:
-        - bearerAuth: []
-      deprecated: false
-  "/api/v1/consul/discoveryClient/getServiceInstances/{serviceId}":
-    get:
-      parameters:
-        - name: serviceId
-          in: path
-          description: service id
-          required: true
-          schema:
-            type: string
-            example: k8s-bip-archetypetest-dev-archetypetest-dev
-            description: The Service to retrieve Service Instances from.
-      tags:
-        - reference-person-discovery-client
-      summary: Retrieves service instance data for the desired service from the Consul Discovery Client.
-      description: Returns a list of all service instances for the given service id from the Consul Discovery Client.
-      operationId: getServiceInstances
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                '$ref': '#/components/schemas/getServiceInstancesResponse'
-        '400':
-          '$ref': '#/components/responses/400'
-        '401':
-          '$ref': '#/components/responses/401'
-        '403':
-          '$ref': '#/components/responses/403'
-        '500':
-          '$ref': '#/components/responses/500'
-      security:
-        - bearerAuth: []
-      deprecated: false
   # The token path should not require any changes
   "/api/v1/token":
     post:
