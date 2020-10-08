@@ -1,4 +1,6 @@
-FROM java:8
+FROM registry.access.redhat.com/openjdk/openjdk-11-rhel7:1.1
+
+USER jboss
 
 # Add a volume pointing to /tmp
 VOLUME /tmp
@@ -9,5 +11,18 @@ ARG JAR_FILE=target/bip-archetypetest.jar
 # Add the application's jar to the container
 ADD ${JAR_FILE} bip-archetypetest.jar
 
-# Run the jar file 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/bip-archetypetest.jar"]
+#Copy all certificate files from local folder to /tmp
+COPY ./vacerts/*.cer /tmp/
+
+#Add the script to run the app
+ADD ./scripts/run-app-jar.sh run-app-jar.sh
+
+USER root
+RUN chmod 777 run-app-jar.sh
+USER jboss
+
+# Run the ENTRYPOINT script 
+#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","./bip-archetypetest.jar"]
+ENTRYPOINT ["./run-app-jar.sh"]
+
+ADD ./scripts/wait-for-it.sh /wait-for-it.sh

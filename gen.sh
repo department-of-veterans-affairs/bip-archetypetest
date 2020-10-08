@@ -24,7 +24,7 @@ genLog="$cwd/$thisFileName.log"
 # git variables
 cgb=$(git rev-parse --abbrev-ref HEAD)
 gitRemote=""
-gitBranchBaseline="master"
+gitBranchBaseline="openjdk"
 gitBranchDb="master-db"
 bitBranchPartner="master-partner"
 

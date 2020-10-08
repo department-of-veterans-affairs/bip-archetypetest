@@ -29,8 +29,8 @@ bip.framework.security.opa:
 spring.profiles: local-int
 bip.framework.security.opa:
   urls:
-    - http://opa:8181/v1/data/bip/http/authz/admin
-    - http://opa:8181/v1/data/bip/http/authz/allow
+  - http://opa:8181/v1/data/bip/http/authz/admin
+  - http://opa:8181/v1/data/bip/http/authz/allow
   allVotersAbstainGrantAccess: false
 ---
 spring:
