@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>gov.va.bip.framework</groupId>
 		<artifactId>bip-framework-parentpom</artifactId>
-		<version>3.0.4</version>
-		<relativePath>../../bip-framework/bip-framework-parentpom/pom.xml</relativePath>
+		<version>3.1.0</version>
+		<relativePath />
 	</parent>
 
 	<groupId>gov.va.bip.archetypetest</groupId>
 	<artifactId>bip-archetypetest-reactor</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>Reactor POM for BIP ArchetypeTest Service</description>
@@ -38,6 +38,8 @@
 		<!-- exclude example sources from sonar scans -->
 		<!-- these exclusions can be removed once these sample classes are no longer needed -->
 		<sonar.exclusions>**/SampleData1.java, **/SampleData2.java, **/PartnerHelper.java, **/SampleByPidDomainToPartner.java, **/SampleByPidPartnerToDomain.java</sonar.exclusions>
+        <java.version>11</java.version>
+        <sonar.java.source>${java.version}</sonar.java.source>
 	</properties>
 	
 	<profiles>
@@ -64,6 +66,9 @@
 						<groupId>com.fortify.sca.plugins.maven</groupId>
 						<artifactId>sca-maven-plugin</artifactId>
 						<version>${sca-maven-plugin.version}</version>
+                        <configuration>
+                            <source>${java.version}</source>
+                        </configuration>
 						<executions>
 							<execution>
 								<id>fortify-sca-clean</id>

@@ -46,7 +46,6 @@ paths:
       security:
         - bearerAuth: []
       deprecated: false
-
   # The token path should not require any changes
   "/api/v1/token":
     post:
@@ -144,45 +143,6 @@ components:
             sampleInfo:
               description: The object representing the sample information
               '$ref': '#/components/schemas/SampleInfo'
-    getServicesResponse:
-      type: object
-      title: getServicesResponse
-      description: Result model for getting registered services using Consul Discovery Service
-      properties:
-        serviceNames:
-          type: array
-          items:
-            type: string
-          example: This is the resulting array of Consul service names
-          description: The resulting array of Consul service names
-    getServiceInstancesResponse:
-      type: object
-      title: getServiceInstancesResponse
-      description: Result model for getting service instances from a desired service using Consul Discovery Service
-      properties:
-        serviceInstances:
-          type: array
-          items:
-            '$ref': '#/components/schemas/ServiceInstance'
-          example: This is the resulting array of Consul service instances
-          description: The resulting array of Consul service instances
-    ServiceInstance:
-      type: object
-      title: ServiceInstance
-      description: Result model of Service Instance data.
-      properties:
-        serviceId:
-          type: string
-        instanceId:
-          type: string
-        uri:
-          type: string
-        host:
-          type: string
-        port:
-          type: integer
-        isSecure:
-          type: boolean
     # Schema objects below are from BIP Framework to be declared.
     # These objects need to be mapped in <importMappings> section
     # of openapi-generator-maven-plugin so that no code is generated

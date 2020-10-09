@@ -1,15 +1,6 @@
 mavenGitflowPipeline {
 
-    useBranchNameTag = true
-    skipTests = false
-    skipFunctionalTests = false
-    skipPerformanceTests = false
-    skipSonar = false
-    skipFortify = false
-    skipTwistlock = false
-
-    //Specify to use the fortify maven plugin, instead of the Ant task to execute the fortify scan
-    useFortifyMavenPlugin = true
+    useJDK11 = true
 
     /*************************************************************************
     * Docker Build Configuration
@@ -21,6 +12,9 @@ mavenGitflowPipeline {
     dockerBuilds = [
         'archetypetest/bip-archetypetest': 'bip-archetypetest'
     ]
+
+    // Will include the git branch name in the tag of promoted images when true.
+    useBranchNameTag = true
 
     /*************************************************************************
     * Functional Testing Configuration
