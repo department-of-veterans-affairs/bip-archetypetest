@@ -15,6 +15,9 @@ spring.profiles.include: remote_client_sims, embedded-redis
 bip-archetypetest:
   ribbon:
     listOfServers: localhost:${server.port}
+spring.liquibase:
+  enabled: false
+  test-rollback-on-update: false
 ---
 spring.profiles: local-int, ci, dev, stage, prod
 spring.profiles.include: remote_client_sims
