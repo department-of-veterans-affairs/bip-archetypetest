@@ -2,6 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <!-- intentionally using old ant-contrib because newer version doesn't work with maven-antrun-plugin -->
+        <ant-contrib.version>20020829</ant-contrib.version>
+        <!-- the maven phase to bind fortify-sca -->
+        <fortify.bind.phase>verify</fortify.bind.phase>
+        <fortify-merge-input-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-input-filepath>
+        <fortify-merge-output-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-output-filepath>
+        <!-- exclude example sources from sonar scans -->
+        <!-- these exclusions can be removed once these sample classes are no longer needed -->
+        <sonar.exclusions>**/SampleData1.java, **/SampleData2.java, **/PartnerHelper.java, **/SampleByPidDomainToPartner.java, **/SampleByPidPartnerToDomain.java</sonar.exclusions>
+        <java.version>11</java.version>
+        <sonar.java.source>${java.version}</sonar.java.source>
+    </properties>
+
 	<parent>
 		<groupId>gov.va.bip.framework</groupId>
 		<artifactId>bip-framework-parentpom</artifactId>
@@ -27,19 +41,7 @@
 	  	</repository>
 	</repositories>
 	
-	<properties>
-		<!-- intentionally using old ant-contrib because newer version doesn't work with maven-antrun-plugin -->
-		<ant-contrib.version>20020829</ant-contrib.version>
-		<!-- the maven phase to bind fortify-sca -->
-		<fortify.bind.phase>verify</fortify.bind.phase>
-		<fortify-merge-input-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-input-filepath>
-		<fortify-merge-output-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-output-filepath>
-		<!-- exclude example sources from sonar scans -->
-		<!-- these exclusions can be removed once these sample classes are no longer needed -->
-		<sonar.exclusions>**/SampleData1.java, **/SampleData2.java, **/PartnerHelper.java, **/SampleByPidDomainToPartner.java, **/SampleByPidPartnerToDomain.java</sonar.exclusions>
-        <java.version>11</java.version>
-        <sonar.java.source>${java.version}</sonar.java.source>
-	</properties>
+
 	
 	<profiles>
 		<!--

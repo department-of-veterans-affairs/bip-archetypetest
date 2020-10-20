@@ -5,6 +5,41 @@
 >
 	<modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <bip-framework.version>3.1.0</bip-framework.version>
+        <domain>localhost</domain>
+        <port>8080</port>
+        <protocol>http</protocol>
+        <Health.threadGroup.threads>5</Health.threadGroup.threads>
+        <Health.threadGroup.rampUp>2</Health.threadGroup.rampUp>
+        <Health.threadGroup.loopCount>10</Health.threadGroup.loopCount>
+        <Health.threadGroup.duration>200</Health.threadGroup.duration>
+        <Health.threadGroup.startUpDelay>5</Health.threadGroup.startUpDelay>
+        <SampleInfo.threadGroup.threads>5</SampleInfo.threadGroup.threads>
+        <SampleInfo.threadGroup.rampUp>2</SampleInfo.threadGroup.rampUp>
+        <SampleInfo.threadGroup.loopCount>10</SampleInfo.threadGroup.loopCount>
+        <SampleInfo.threadGroup.duration>200</SampleInfo.threadGroup.duration>
+        <SampleInfo.threadGroup.startUpDelay>5</SampleInfo.threadGroup.startUpDelay>
+        <SampleInfoNoRecordFound.threadGroup.threads>5</SampleInfoNoRecordFound.threadGroup.threads>
+        <SampleInfoNoRecordFound.threadGroup.rampUp>2</SampleInfoNoRecordFound.threadGroup.rampUp>
+        <SampleInfoNoRecordFound.threadGroup.loopCount>10</SampleInfoNoRecordFound.threadGroup.loopCount>
+        <SampleInfoNoRecordFound.threadGroup.duration>200</SampleInfoNoRecordFound.threadGroup.duration>
+        <SampleInfoNoRecordFound.threadGroup.startUpDelay>5</SampleInfoNoRecordFound.threadGroup.startUpDelay>
+        <SampleInfoInvalidPid.threadGroup.threads>5</SampleInfoInvalidPid.threadGroup.threads>
+        <SampleInfoInvalidPid.threadGroup.rampUp>2</SampleInfoInvalidPid.threadGroup.rampUp>
+        <SampleInfoInvalidPid.threadGroup.loopCount>10</SampleInfoInvalidPid.threadGroup.loopCount>
+        <SampleInfoInvalidPid.threadGroup.duration>200</SampleInfoInvalidPid.threadGroup.duration>
+        <SampleInfoInvalidPid.threadGroup.startUpDelay>5</SampleInfoInvalidPid.threadGroup.startUpDelay>
+        <SampleInfoNullPid.threadGroup.threads>5</SampleInfoNullPid.threadGroup.threads>
+        <SampleInfoNullPid.threadGroup.rampUp>2</SampleInfoNullPid.threadGroup.rampUp>
+        <SampleInfoNullPid.threadGroup.loopCount>10</SampleInfoNullPid.threadGroup.loopCount>
+        <SampleInfoNullPid.threadGroup.duration>200</SampleInfoNullPid.threadGroup.duration>
+        <SampleInfoNullPid.threadGroup.startUpDelay>5</SampleInfoNullPid.threadGroup.startUpDelay>
+        <BearerTokenCreate.threadGroup.threads>5</BearerTokenCreate.threadGroup.threads>
+        <BearerTokenCreate.threadGroup.rampUp>1</BearerTokenCreate.threadGroup.rampUp>
+        <BearerTokenCreate.threadGroup.loopCount>1</BearerTokenCreate.threadGroup.loopCount>
+    </properties>
+
 	<parent>
 		<groupId>gov.va.bip.archetypetest</groupId>
 		<artifactId>bip-archetypetest-reactor</artifactId>
@@ -17,40 +52,7 @@
 	<name>${project.artifactId}</name>
 	<description>ArchetypeTest Service Implementation for BIP Project</description>
 
-	<properties>
-		<bip-framework.version>3.1.0</bip-framework.version>
-		<domain>localhost</domain>
-		<port>8080</port>
-		<protocol>http</protocol>
-		<Health.threadGroup.threads>5</Health.threadGroup.threads>
-		<Health.threadGroup.rampUp>2</Health.threadGroup.rampUp>
-		<Health.threadGroup.loopCount>10</Health.threadGroup.loopCount>
-		<Health.threadGroup.duration>200</Health.threadGroup.duration>
-		<Health.threadGroup.startUpDelay>5</Health.threadGroup.startUpDelay>
-		<SampleInfo.threadGroup.threads>5</SampleInfo.threadGroup.threads>
-		<SampleInfo.threadGroup.rampUp>2</SampleInfo.threadGroup.rampUp>
-		<SampleInfo.threadGroup.loopCount>10</SampleInfo.threadGroup.loopCount>
-		<SampleInfo.threadGroup.duration>200</SampleInfo.threadGroup.duration>
-		<SampleInfo.threadGroup.startUpDelay>5</SampleInfo.threadGroup.startUpDelay>
-		<SampleInfoNoRecordFound.threadGroup.threads>5</SampleInfoNoRecordFound.threadGroup.threads>
-		<SampleInfoNoRecordFound.threadGroup.rampUp>2</SampleInfoNoRecordFound.threadGroup.rampUp>
-		<SampleInfoNoRecordFound.threadGroup.loopCount>10</SampleInfoNoRecordFound.threadGroup.loopCount>
-		<SampleInfoNoRecordFound.threadGroup.duration>200</SampleInfoNoRecordFound.threadGroup.duration>
-		<SampleInfoNoRecordFound.threadGroup.startUpDelay>5</SampleInfoNoRecordFound.threadGroup.startUpDelay>
-		<SampleInfoInvalidPid.threadGroup.threads>5</SampleInfoInvalidPid.threadGroup.threads>
-		<SampleInfoInvalidPid.threadGroup.rampUp>2</SampleInfoInvalidPid.threadGroup.rampUp>
-		<SampleInfoInvalidPid.threadGroup.loopCount>10</SampleInfoInvalidPid.threadGroup.loopCount>
-		<SampleInfoInvalidPid.threadGroup.duration>200</SampleInfoInvalidPid.threadGroup.duration>
-		<SampleInfoInvalidPid.threadGroup.startUpDelay>5</SampleInfoInvalidPid.threadGroup.startUpDelay>
-		<SampleInfoNullPid.threadGroup.threads>5</SampleInfoNullPid.threadGroup.threads>
-		<SampleInfoNullPid.threadGroup.rampUp>2</SampleInfoNullPid.threadGroup.rampUp>
-		<SampleInfoNullPid.threadGroup.loopCount>10</SampleInfoNullPid.threadGroup.loopCount>
-		<SampleInfoNullPid.threadGroup.duration>200</SampleInfoNullPid.threadGroup.duration>
-		<SampleInfoNullPid.threadGroup.startUpDelay>5</SampleInfoNullPid.threadGroup.startUpDelay>
-		<BearerTokenCreate.threadGroup.threads>5</BearerTokenCreate.threadGroup.threads>
-		<BearerTokenCreate.threadGroup.rampUp>1</BearerTokenCreate.threadGroup.rampUp>
-		<BearerTokenCreate.threadGroup.loopCount>1</BearerTokenCreate.threadGroup.loopCount>
-	</properties>
+
 
 	<dependencies>
 		<!--
