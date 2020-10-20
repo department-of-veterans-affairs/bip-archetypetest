@@ -6,7 +6,6 @@
 		<groupId>gov.va.bip.framework</groupId>
 		<artifactId>bip-framework-parentpom</artifactId>
 		<version>3.1.0</version>
-		<relativePath />
 	</parent>
 
 	<groupId>gov.va.bip.archetypetest</groupId>
