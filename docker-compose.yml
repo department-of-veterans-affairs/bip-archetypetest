@@ -23,6 +23,7 @@ services:
       - spring.cloud.vault.consul.enabled=true
       - bip.framework.security.jwt.enabled=true
       - spring.cloud.vault.kv.application-name=blue/bip-archetypetest
+      - JAVA_TOOL_OPTIONS=-XX:+PrintFlagsFinal -XX:MaxRAMPercentage=67.0 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStore=/var/run/secrets/java.io/keystores/truststore.jks
     ports:
       - "8080:8080"
     networks:

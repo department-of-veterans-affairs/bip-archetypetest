@@ -35,7 +35,7 @@ For examples and documentation about how projects are structured, configured, an
 
 # Framework libraries in this project
 
-The projects in this repository are dependent on the libraries from [BIP framework](https://github.ec.va.gov/EPMO/bip-framework) and [BIP framework test library](https://github.ec.va.gov/EPMO/bip-framework/tree/master/bip-framework-test-lib) for  auto configuration, common shared libraries, parent pom maven configuration and test libary.
+The projects in this repository are dependent on the libraries from [BIP framework](https://github.ec.va.gov/EPMO/bip-framework) and [BIP framework test library](https://github.ec.va.gov/EPMO/bip-framework/tree/master/bip-framework-test-lib) for  auto configuration, common shared libraries, parent pom maven configuration and test library.
 
 1. `bip-framework-parentpom` is the parent of your application's parent (e.g. reactor) POM
 

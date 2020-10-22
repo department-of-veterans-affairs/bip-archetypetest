@@ -1,0 +1,5 @@
+mavenPerformancePipeline {
+    perfTestUrl = 'http://bip-archetypetest-dev.archetypetest-dev:8080'
+    perfOpts = '-DjMeterTestFile=ArchetypeTestServicePerformanceTestPlan.jmx'
+    useJDK11 = true
+}
