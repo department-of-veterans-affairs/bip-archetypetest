@@ -65,6 +65,10 @@ spring:
   cloud:
     bus:
       enabled: false
+    discovery:
+      client:
+        composite-indicator:
+          enabled: false
   security:
     basic:
       enabled: false
@@ -94,6 +98,22 @@ management.endpoint.beans.enabled: false
 management.endpoint.health.show-details: "ALWAYS"
 management:
   health:
+    consul:
+      enabled: false
+    vault:
+      enabled: false
+    db:
+      enabled: false
+    diskspace:
+      enabled: true
+    refresh:
+      enabled: true
+    ratelimiters:
+      enabled: false
+    circuitbreakers:
+      enabled: false
+    hystrix:
+      enabled: false
     rabbit:
       enabled: false
     redis:
