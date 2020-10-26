@@ -1,5 +1,7 @@
 mavenGitflowPipeline {
 
+    safeTwistlockScan = false
+
     useJDK11 = true
 
     /*************************************************************************
