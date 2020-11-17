@@ -2,7 +2,7 @@ mavenGitflowPipeline {
 
     safeTwistlockScan = false
 
-    useJDK11 = true
+    useJDK11 = false
 
     /*************************************************************************
     * Docker Build Configuration
