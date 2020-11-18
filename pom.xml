@@ -38,7 +38,7 @@
 		<!-- exclude example sources from sonar scans -->
 		<!-- these exclusions can be removed once these sample classes are no longer needed -->
 		<sonar.exclusions>**/SampleData1.java, **/SampleData2.java, **/PartnerHelper.java, **/SampleByPidDomainToPartner.java, **/SampleByPidPartnerToDomain.java</sonar.exclusions>
-        <java.version>8</java.version>
+        <java.version>11</java.version>
         <sonar.java.source>${java.version}</sonar.java.source>
 	</properties>
 	
