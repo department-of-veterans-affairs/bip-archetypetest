@@ -1,5 +1,10 @@
 FROM registry.access.redhat.com/openjdk/openjdk-11-rhel7:1.1
 
+# Delete vulnerable jar if it exists (force flag accomplishes this)
+USER root
+RUN rm -f /usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar
+USER jboss
+
 # Add a volume pointing to /tmp
 VOLUME /tmp
 
