@@ -86,6 +86,30 @@ paths:
         '500':
            '$ref': '#/components/responses/500'
       deprecated: false
+    # The token path should not require any changes
+  "/api/v1/archetypetest/getPersonFromKafka":
+    get:
+      tags:
+        - Kafka
+      summary: Get the most recent Person sent over by Kafka
+      description: Gets the most recent person that was consumed off the Kafka queue
+      operationId: getPersonFromKafka
+      responses:
+        '200':
+          description: The name of the more recent person consumed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          '$ref': '#/components/responses/400'
+        '401':
+          '$ref': '#/components/responses/401'
+        '403':
+          '$ref': '#/components/responses/403'
+        '500':
+          '$ref': '#/components/responses/500'
+      deprecated: false
 components:
   # securitySchemes are defined by the framework.
   # Service applications must configure as below.
