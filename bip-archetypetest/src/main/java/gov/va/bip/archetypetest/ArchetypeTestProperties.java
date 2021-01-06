@@ -32,6 +32,10 @@ public class ArchetypeTestProperties {
 	@NotNull
 	private String password;
 
+	//TODO: CORSMANUALUPDATE
+//	@NotNull
+//	private String[] archetypetests;
+
 	public String getEnv() {
 		return env;
 	}
@@ -63,4 +67,13 @@ public class ArchetypeTestProperties {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	//TODO: CORSMANUALUPDATE
+//	public String[] getArchetypeTests() {
+//		return archetypetests;
+//	}
+//
+//	public void setArchetypeTests(String[] archetypetests) {
+//		this.archetypetests = archetypetests;
+//	}
 }
