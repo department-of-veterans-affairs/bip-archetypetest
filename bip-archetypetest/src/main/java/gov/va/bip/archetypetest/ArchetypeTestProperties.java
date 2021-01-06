@@ -33,8 +33,8 @@ public class ArchetypeTestProperties {
 	private String password;
 
 	//TODO: CORSMANUALUPDATE
-//	@NotNull
-//	private String[] archetypetests;
+	@NotNull
+	private String[] origins;
 
 	public String getEnv() {
 		return env;
@@ -69,11 +69,11 @@ public class ArchetypeTestProperties {
 	}
 
 	//TODO: CORSMANUALUPDATE
-//	public String[] getArchetypeTests() {
-//		return archetypetests;
-//	}
-//
-//	public void setArchetypeTests(String[] archetypetests) {
-//		this.archetypetests = archetypetests;
-//	}
+	public String[] getOrigins() {
+		return origins;
+	}
+
+	public void setOrigins(String[] origins) {
+		this.origins = origins;
+	}
 }

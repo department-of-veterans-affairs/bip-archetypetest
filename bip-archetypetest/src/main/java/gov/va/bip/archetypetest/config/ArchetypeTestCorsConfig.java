@@ -27,7 +27,7 @@ public class ArchetypeTestCorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 if (httpProperties.getCors() != null && httpProperties.getCors().isEnabled()) {
                     //TODO: CORSMANUALUPDATE
-//                    registry.addMapping("/api/v1/archetypetest/**").allowedArchetypeTests(archetypetestProperties.getArchetypeTests());
+                    registry.addMapping("/api/v1/archetypetest/**").allowedOrigins(archetypetestProperties.getOrigins());
                 }
             }
         };
