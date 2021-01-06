@@ -32,7 +32,7 @@ public class ArchetypeTestProperties {
 	@NotNull
 	private String password;
 
-	//TODO: CORSMANUALUPDATE
+	//UIEnablement
 	@NotNull
 	private String[] origins;
 
@@ -68,7 +68,7 @@ public class ArchetypeTestProperties {
 		this.password = password;
 	}
 
-	//TODO: CORSMANUALUPDATE
+	//UIEnablement
 	public String[] getOrigins() {
 		return origins;
 	}

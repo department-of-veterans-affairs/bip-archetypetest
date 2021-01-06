@@ -26,7 +26,7 @@ public class ArchetypeTestCorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 if (httpProperties.getCors() != null && httpProperties.getCors().isEnabled()) {
-                    //TODO: CORSMANUALUPDATE
+                    //UIEnablement
                     registry.addMapping("/api/v1/archetypetest/**").allowedOrigins(archetypetestProperties.getOrigins());
                 }
             }
