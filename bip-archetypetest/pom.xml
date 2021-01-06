@@ -187,6 +187,12 @@
 			<version>${bip-framework.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Kafka Dependencies -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
