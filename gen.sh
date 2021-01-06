@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ## turn on to assist debugging ##
 #export PS4='[$LINENO] '
@@ -24,7 +24,7 @@ genLog="$cwd/$thisFileName.log"
 # git variables
 cgb=$(git rev-parse --abbrev-ref HEAD)
 gitRemote=""
-gitBranchBaseline="openjdk"
+gitBranchBaseline="master"
 gitBranchDb="master-db"
 bitBranchPartner="master-partner"
 
@@ -808,6 +808,11 @@ function change_text() {
 		# uppercase replacement
 		oldVal="ORIGIN"
 		newVal="$artifactNameUpperCase"
+		echo "LC_ALL=C sed -i \"\" -e 's/'\"$oldVal\"'/'\"$newVal\"'/g' \"$tmpFile\"" 2>&1 | tee -a "$genLog"
+		LC_ALL=C sed -i "" -e 's/'"$oldVal"'/'"$newVal"'/g' "$tmpFile" 2>&1 >> "$genLog"
+		# cors replacement
+		oldVal="origs"
+		newVal="origins"
 		echo "LC_ALL=C sed -i \"\" -e 's/'\"$oldVal\"'/'\"$newVal\"'/g' \"$tmpFile\"" 2>&1 | tee -a "$genLog"
 		LC_ALL=C sed -i "" -e 's/'"$oldVal"'/'"$newVal"'/g' "$tmpFile" 2>&1 >> "$genLog"
 		# projectNameSpacePrefix replacement
