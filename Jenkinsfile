@@ -1,5 +1,7 @@
 mavenGitflowPipeline {
 
+    skipUndeploy = true 
+
     useJDK11 = true
 
     /*************************************************************************
