@@ -34,7 +34,7 @@ public class ArchetypeTestProperties {
 
 	// UIEnablement
 	// The usage of the word origin in all lower case is problematic in the gen.sh script.
-	// After generation, replace with all lower case version or camel case version and uncomment.
+	// After generation, the scripts will replace with all lower case version or camel case version and uncomment as necessary.
 	@NotNull
 	private String[] origins;
 
@@ -72,7 +72,7 @@ public class ArchetypeTestProperties {
 
 // UIEnablement
 // The usage of the word origin in all lower case is problematic in the gen.sh script.
-// After generation, replace with all lower case version or camel case version and uncomment.
+// After generation, the scripts will replace with all lower case version or camel case version and uncomment as necessary.
 	public String[] getOrigins() {
 		return origins;
 	}
