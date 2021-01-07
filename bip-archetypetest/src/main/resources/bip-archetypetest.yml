@@ -98,10 +98,10 @@ spring:
         enabled:
           protocols: TLSv1
         keystore:
-          location: ${bip.framework.kafka.keystore.location:classpath:test/ssl/dev/blueKeystore.jks}
+          location: ${bip.framework.kafka.keystore.location:classpath:/test/ssl/dev/blueKeystore.jks}
           password: ${bip.framework.kafka.keystore:changeit}
         truststore:
-          location: ${bip.framework.kafka.keystore.location:classpath:test/ssl/dev/blueTruststore.jks}
+          location: ${bip.framework.kafka.keystore.location:classpath:/test/ssl/dev/blueTruststore.jks}
           password: ${bip.framework.kafka.truststore:changeit}
       bootstrap:
         servers: ${bip.framework.kafka.bootstrap.servers:kafka.sbx8.bip.va.gov:9092}
