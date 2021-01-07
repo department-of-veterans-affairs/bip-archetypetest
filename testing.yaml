@@ -21,7 +21,7 @@
       enabled: false
       register: false
   spring:
-    profiles: "ci"
+    profiles: "dev, ci"
   opa:
     enabled: true # OPAEnablement: Set this to true if you want to enable OPA
     rego: api_authz_jwt_token.rego
