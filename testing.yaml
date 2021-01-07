@@ -11,8 +11,14 @@
   ingress:
     enabled: true
   vault:
-    enabled: false
-    consulBackendEnabled: false
+    host: "dev8-vault.vault.svc.dev8"
+      enabled: true
+      kubernetes:
+        role: archetypetest-dev
+      kv:
+        applicationName: blue/bip-archetypetest
+      port: 8200
+      scheme: http
   consul:
     enabled: false
     config:
