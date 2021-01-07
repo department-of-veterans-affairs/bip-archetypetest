@@ -14,7 +14,7 @@ vault:
   host: "dev8-vault.vault.svc.dev8"
   enabled: true
   kubernetes:
-    role: archetypetest-dev
+    role: blue-dev
   kv:
     applicationName: blue/bip-archetypetest
   port: 8200
