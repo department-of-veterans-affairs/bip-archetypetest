@@ -11,9 +11,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT,  
-	properties = { "spring.cloud.bus.enabled=false", "spring.cloud.discovery.enabled=false", 
-			"spring.cloud.consul.enabled=false", "spring.cloud.config.discovery.enabled=false", "spring.cloud.vault.enabled=false"})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+		properties = { "spring.cloud.bus.enabled=false", "spring.cloud.discovery.enabled=false",
+				"spring.cloud.consul.enabled=false", "spring.cloud.config.discovery.enabled=false",
+				"spring.cloud.vault.enabled=false", "bip.framework.security.http.cors.enabled=true",
+				"bip-archetypetest.origins=https://bip-archetypetest-ui-dev.dev8.bip.va.gov" })
 public class ArchetypeTestServiceApplicationTests {
 	
 
