@@ -32,7 +32,9 @@ public class ArchetypeTestProperties {
 	@NotNull
 	private String password;
 
-	//UIEnablement
+	// UIEnablement
+	// The usage of the word origin in all lower case is problematic in the gen.sh script.
+	// After generation, replace with all lower case version or camel case version and uncomment.
 	@NotNull
 	private String[] origins;
 
@@ -68,7 +70,9 @@ public class ArchetypeTestProperties {
 		this.password = password;
 	}
 
-	//UIEnablement
+// UIEnablement
+// The usage of the word origin in all lower case is problematic in the gen.sh script.
+// After generation, replace with all lower case version or camel case version and uncomment.
 	public String[] getOrigins() {
 		return origins;
 	}
