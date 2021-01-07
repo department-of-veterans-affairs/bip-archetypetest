@@ -10,15 +10,6 @@ image:
   pullPolicy: Always
 ingress:
   enabled: true
-vault:
-  host: "dev8-vault.vault.svc.dev8"
-  enabled: true
-  kubernetes:
-    role: blue-dev
-  kv:
-    applicationName: blue/bip-archetypetest
-  port: 8200
-  scheme: http
 consul:
   enabled: true
   scheme: http
