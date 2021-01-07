@@ -12,13 +12,13 @@ ingress:
   enabled: true
 vault:
   host: "dev8-vault.vault.svc.dev8"
-    enabled: true
-    kubernetes:
-      role: archetypetest-dev
-    kv:
-      applicationName: blue/bip-archetypetest
-    port: 8200
-    scheme: http
+  enabled: true
+  kubernetes:
+    role: archetypetest-dev
+  kv:
+    applicationName: blue/bip-archetypetest
+  port: 8200
+  scheme: http
 consul:
   enabled: true
   scheme: http
