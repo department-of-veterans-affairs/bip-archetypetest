@@ -4,6 +4,8 @@ mavenGitflowPipeline {
     skipSonar = true
     skipFortify = true
     skipTwistlock = true
+    
+    helmTimeout = 500
 
     useJDK11 = true
 
