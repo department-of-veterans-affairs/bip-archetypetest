@@ -1,6 +1,9 @@
 mavenGitflowPipeline {
 
     skipUndeploy = true 
+    skipSonar = true
+    skipFortify = true
+    skipTwistlock = true
 
     useJDK11 = true
 
