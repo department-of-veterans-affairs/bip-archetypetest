@@ -109,6 +109,8 @@ paths:
           '$ref': '#/components/responses/403'
         '500':
           '$ref': '#/components/responses/500'
+      security:
+        - bearerAuth: []
       deprecated: false
 components:
   # securitySchemes are defined by the framework.
