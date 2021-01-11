@@ -106,7 +106,6 @@ spring:
       bootstrap:
         servers: ${bip.framework.kafka.bootstrap.servers:kafka.sbx8.bip.va.gov:9092}
     consumer:
-      group-id: bip-vetinfo-pi-demo
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 io.confluent.developer.config.topic.name: bip-vetinfo-pi-demo
