@@ -1,4 +1,6 @@
 mavenGitflowPipeline {
+    
+    helmTimeout = 500
 
     useJDK11 = true
 
