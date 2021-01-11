@@ -2,6 +2,8 @@ mavenGitflowPipeline {
     
     helmTimeout = 500
 
+    skipSonar = true
+    
     useJDK11 = true
 
     /*************************************************************************
