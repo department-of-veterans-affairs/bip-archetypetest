@@ -11,7 +11,7 @@
 
 	<groupId>gov.va.bip.archetypetest</groupId>
 	<artifactId>bip-archetypetest-reactor</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>Reactor POM for BIP ArchetypeTest Service</description>
