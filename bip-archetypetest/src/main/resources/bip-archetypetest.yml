@@ -180,6 +180,7 @@ logging:
     sun.net.www.protocol: WARN
     org.apache.kafka: INFO
     javax.net.ssl: INFO
+    org.springframework.kafka: INFO
 ##################################################
 # Ribbon timeout, server refresh interval, retry
 # settings for the requests
