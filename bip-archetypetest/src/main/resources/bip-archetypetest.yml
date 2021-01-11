@@ -178,6 +178,7 @@ logging:
     org.springframework.web.client: WARN
     org.springframework.ws: WARN
     sun.net.www.protocol: WARN
+    org.apache.kafka: INFO
 ##################################################
 # Ribbon timeout, server refresh interval, retry
 # settings for the requests
