@@ -1,9 +1,4 @@
 mavenGitflowPipeline {
-
-    skipUndeploy = true 
-    skipSonar = true
-    skipFortify = true
-    skipTwistlock = true
     
     helmTimeout = 500
 
