@@ -106,9 +106,10 @@ spring:
       bootstrap:
         servers: ${bip.framework.kafka.bootstrap.servers:kafka.sbx8.bip.va.gov:9092}
     consumer:
+      group-id: bip-reference-person
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-io.confluent.developer.config.topic.name: bip-vetinfo-pi-demo
+io.confluent.developer.config.topic.name: bip-reference-person
 # Route Path
 # service.context: http://localhost:8080
 
