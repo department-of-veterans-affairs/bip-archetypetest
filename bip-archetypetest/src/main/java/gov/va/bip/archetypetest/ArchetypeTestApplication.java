@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 import brave.sampler.Sampler;
@@ -29,6 +30,7 @@ import gov.va.bip.archetypetest.config.ArchetypeTestConfig;
 @EnableAsync
 // Add any partner Config classes to @Import
 @Import({ ArchetypeTestConfig.class })
+@EnableKafka
 public class ArchetypeTestApplication {
 
 	/**
