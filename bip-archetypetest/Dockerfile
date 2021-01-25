@@ -1,8 +1,15 @@
 FROM registry.access.redhat.com/openjdk/openjdk-11-rhel7:1.1
 
-# Delete vulnerable jar if it exists (force flag accomplishes this)
 USER root
+
+# add the nexus yum repository
+ADD ./scripts/nexus.repo /etc/yum.repos.d
+RUN yum update -y
+
+# Delete vulnerable jar if it exists (force flag accomplishes this)
 RUN rm -f /usr/share/java/prometheus-jmx-exporter/jmx_prometheus_javaagent.jar
+
+
 USER jboss
 
 # Add a volume pointing to /tmp

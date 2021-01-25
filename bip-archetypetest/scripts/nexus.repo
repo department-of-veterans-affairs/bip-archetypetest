@@ -1,0 +1,8 @@
+[nexusrepo]
+name=Nexus Yum Repository
+baseurl=https://nexus.dev8.bip.va.gov/repository/VAEC-yum-clone/
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+sslverify=0
+priority=1
