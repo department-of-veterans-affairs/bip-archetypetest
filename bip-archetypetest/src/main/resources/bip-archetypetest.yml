@@ -104,7 +104,7 @@ spring:
           location: ${bip.framework.kafka.truststore.location:src/main/resources/test/ssl/dev/blueTruststore.jks}
           password: ${bip.framework.kafka.truststore:changeit}
       bootstrap:
-        servers: ${bip.framework.kafka.bootstrap.servers:kafka.sbx8.bip.va.gov:9092}
+        servers: ${bip.framework.kafka.bootstrap.servers:SSL://kafka.kafkav2.dev8.bip.va.gov:443}
     consumer:
       group-id: bip-pi-demo
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
