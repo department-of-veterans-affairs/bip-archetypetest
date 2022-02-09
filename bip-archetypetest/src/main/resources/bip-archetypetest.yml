@@ -96,7 +96,7 @@ spring:
         protocol: SSL
       ssl:
         enabled:
-          protocols: TLSv1
+          protocols: TLSv1.2,TLSv1.1,TLSv1
         keystore:
           location: ${bip.framework.kafka.keystore.location:src/main/resources/test/ssl/dev/blueKeystore.jks}
           password: ${bip.framework.kafka.keystore:changeit}
