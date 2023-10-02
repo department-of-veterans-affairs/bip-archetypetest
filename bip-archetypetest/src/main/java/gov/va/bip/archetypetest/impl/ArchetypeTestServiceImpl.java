@@ -13,9 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
 import gov.va.bip.framework.cache.BipCacheUtil;
 import gov.va.bip.framework.exception.BipException;
 import gov.va.bip.framework.exception.BipRuntimeException;
@@ -29,13 +26,16 @@ import gov.va.bip.archetypetest.model.SampleDomainRequest;
 import gov.va.bip.archetypetest.model.SampleDomainResponse;
 import gov.va.bip.archetypetest.model.SampleInfoDomain;
 import gov.va.bip.archetypetest.utils.CacheConstants;
-import gov.va.bip.archetypetest.utils.HystrixCommandConstants;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 
 /**
  * Implementation class for the ArchetypeTest Service.
- * It is recommended to implement the hystrix circuit breaker pattern.
- * When there is a failure the fallback method is invoked and the response is
- * returned from the cache
+ * The class demonstrates the implementation of resilience4j circuit breaker pattern for read
+ * operations. When there is a failure the fallback method is invoked and the
+ * response is returned from the cache
  *
  * @author akulkarni
  */
@@ -43,7 +43,6 @@ import gov.va.bip.archetypetest.utils.HystrixCommandConstants;
 @Component
 @Qualifier("ARCHETYPETEST_SERVICE_IMPL")
 @RefreshScope
-@DefaultProperties(groupKey = HystrixCommandConstants.ARCHETYPETEST_SERVICE_GROUP_KEY)
 public class ArchetypeTestServiceImpl implements ArchetypeTestService {
 	private static final BipLogger LOGGER = BipLoggerFactory.getLogger(ArchetypeTestServiceImpl.class);
 
@@ -66,7 +65,7 @@ public class ArchetypeTestServiceImpl implements ArchetypeTestService {
 	 * <p>
 	 * If graceful degredation is possible, add
 	 * {@code fallbackMethod = "sampleFindByParticipantIDFallBack"}
-	 * to the {@code @HystrixCommand}.
+	 * to the {@code @CircuitBreaker}.
 	 * <p>
 	 * {@inheritDoc}
 	 *
@@ -75,9 +74,10 @@ public class ArchetypeTestServiceImpl implements ArchetypeTestService {
 	@CachePut(value = CacheConstants.CACHENAME_ARCHETYPETEST_SERVICE,
 			key = "#root.methodName + T(gov.va.bip.framework.cache.BipCacheUtil).createKey(#sampleDomainRequest.participantID)",
 			unless = "T(gov.va.bip.framework.cache.BipCacheUtil).checkResultConditions(#result)")
-	@HystrixCommand(commandKey = "SampleFindByParticipantIDCommand",
-			ignoreExceptions = { IllegalArgumentException.class, BipException.class, BipRuntimeException.class },
-            fallbackMethod = "sampleFindByParticipantIDFallBack")
+	@CircuitBreaker(name = "sampleFindByParticipantID", fallbackMethod = "sampleFindByParticipantIDFallBack")
+	@Bulkhead(name = "sampleFindByParticipantID")
+	@RateLimiter(name = "sampleFindByParticipantID")
+	@Retry(name = "sampleFindByParticipantID")
 	public SampleDomainResponse sampleFindByParticipantID(final SampleDomainRequest sampleDomainRequest) {
 
 		String cacheKey = "sampleFindByParticipantID" + BipCacheUtil.createKey(sampleDomainRequest.getParticipantID());
@@ -109,31 +109,26 @@ public class ArchetypeTestServiceImpl implements ArchetypeTestService {
 	}
 
 	/**
-	 * Support graceful degradation in a Hystrix command by adding a fallback method that Hystrix will call to obtain a
+	 * Support graceful degradation by adding a fallback method that @CircuitBreaker will call to obtain a
 	 * default value or values in case the main command fails for {@link #sampleFindByParticipantID(SampleDomainRequest)}.
-	 * <p>
-	 * See {https://github.com/Netflix/Hystrix/wiki/How-To-Use#fallback} for Hystrix Fallback usage
-	 * <p>
-	 * Hystrix doesn't REQUIRE you to set this method. However, if it is possible to degrade gracefully
+	 * 
+	 * @CircuitBreaker doesn't REQUIRE you to set this method. However, if it is possible to degrade gracefully
 	 * - perhaps by returning static data, or performing some other process - the degraded process should
 	 * be performed in the fallback method. In order to enable a fallback such as this, on the main method,
-	 * add to its {@code @HystrixCommand} the {@code fallbackMethod} attribute. So for
+	 * add to its {@code @CircuitBreaker} the {@code fallbackMethod} attribute. So for
 	 * {@link #sampleFindByParticipantID(SampleDomainRequest)}
-	 * you would add the attribute to its {@code @HystrixCommand}:<br/>
+	 * you would add the attribute to its {@code @CircuitBreaker}:<br/>
 	 *
 	 * <pre>
 	 * fallbackMethod = "sampleFindByParticipantIDFallBack"
 	 * </pre>
-	 *
-	 * <b>Note that exceptions should not be thrown from any fallback method.</b>
-	 * It will "confuse" Hystrix and cause it to throw an HystrixRuntimeException.
+	 * 
 	 * <p>
 	 *
 	 * @param sampleDomainRequest The request from the Java Service.
 	 * @param throwable the throwable
 	 * @return A JAXB element for the WS request
 	 */
-	@HystrixCommand(commandKey = "SampleFindByParticipantIDFallBackCommand")
 	public SampleDomainResponse sampleFindByParticipantIDFallBack(final SampleDomainRequest sampleDomainRequest,
 			final Throwable throwable) {
 		LOGGER.info("sampleFindByParticipantIDFallBack has been activated");
@@ -144,7 +139,7 @@ public class ArchetypeTestServiceImpl implements ArchetypeTestService {
 		 *
 		 * If needed to be configured, add annotation to the implementation method "findPersonByParticipantID" as below
 		 *
-		 * @HystrixCommand(fallbackMethod = "findPersonByParticipantIDFallBack")
+		 * @Command(fallbackMethod = "findPersonByParticipantIDFallBack")
 		 */
 		final SampleDomainResponse response = new SampleDomainResponse();
 		response.setDoNotCacheResponse(true);

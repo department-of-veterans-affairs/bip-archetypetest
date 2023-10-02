@@ -110,7 +110,7 @@ mvn clean verify -Pperftest -Dprotocol=<> -Ddomain=<> -Dport=<> -DBearerTokenCre
 ```
 
 ## How to set up JMeter and Create Test Plan (JMX)
-For an example from the BIP Reference app, see [BIP Reference - Performance Testing Guide](https://github.ec.va.gov/EPMO/bip-reference-person/tree/master/bip-reference-perftest)
+For an example from the BIP Reference app, see [BIP Reference - Performance Testing Guide](https://github.com/department-of-veterans-affairs/bip-reference-person/tree/master/bip-reference-perftest)
 
 # Functional Tests
 Functional tests are created to make sure the end points in archetypetest are working as expected.
@@ -165,6 +165,12 @@ DEV: mvn verify -Pinttest -Dtest.env=dev -Ddockerfile.skip=true -Dcucumber.optio
 
 
 ## More Details For Functional Test
-For examples from the BIP Reference service, see [Integration Testing Guide](https://github.ec.va.gov/EPMO/bip-reference-person/tree/master/bip-reference-inttest)
+For examples from the BIP Reference service, see [Integration Testing Guide](https://github.com/department-of-veterans-affairs/bip-reference-person/tree/master/bip-reference-inttest)
 
 
+## Enabling Kafka
+The Archetype service has been configured to set utilize Confluent Kafka Services if desired. Currently, if you wish to use kafka services, you will need to communicate this desire out to the BIP Platform Team. We will assist in helping to set up your environment to fit your project. 
+
+In the code, all configs related to the kafka services are the in application .yml in the resources directory. You will need to make sure that you have the correct paths for your cert files for your key and trust store and SSL is the default security standards. 
+
+If you require further assistance in developing your application, feel free to reach out to the BIP Platform team for assistance on Slack at @platform-framework or through email at @E_API_Framework. 

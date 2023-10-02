@@ -24,7 +24,7 @@ spring.profiles.include: embedded-redis
 ---
 spring.profiles: local-int, ci
 bip.framework.security.opa:
-  enabled: true # OPAEnablement: Set this to true if you want to enable OPA
+  enabled: false # OPAEnablement: Set this to true if you want to enable OPA
 ---
 spring.profiles: local-int
 bip.framework.security.opa:
@@ -36,6 +36,7 @@ bip.framework.security.opa:
 spring:
   cache:
     type: redis
+  config.use-legacy-processing: true
   # Properties for org.springframework.boot.autoconfigure.data.redis.RedisProperties
   redis:
     ssl: false
@@ -87,30 +88,10 @@ spring:
       FAIL_ON_IGNORED_PROPERTIES: false
       FAIL_ON_UNKNOWN_PROPERTIES: false
   liquibase.enabled: false
-  #Kafka Properties 
-  kafka:
-    properties:
-      consumer:
-        enabled: true
-      security:
-        protocol: SSL
-      ssl:
-        enabled:
-          protocols: TLSv1.2,TLSv1.1,TLSv1
-        keystore:
-          location: ${bip.framework.kafka.keystore.location:src/main/resources/test/ssl/dev/blueKeystore.jks}
-          password: ${bip.framework.kafka.keystore:changeit}
-        truststore:
-          location: ${bip.framework.kafka.truststore.location:src/main/resources/test/ssl/dev/blueTruststore.jks}
-          password: ${bip.framework.kafka.truststore:changeit}
-      bootstrap:
-        servers: ${bip.framework.kafka.bootstrap.servers:SSL://kafka.kafkav2.dev8.bip.va.gov:443}
-    consumer:
-      group-id: bip-pi-demo
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-io.confluent.developer.config.topic.name: bip-vetinfo-pi-demo
-# Route Path
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 # service.context: http://localhost:8080
 
 #management.endpoints.enabled-by-default: true
@@ -118,7 +99,8 @@ io.confluent.developer.config.topic.name: bip-vetinfo-pi-demo
 management.endpoints.web.exposure.include: "*"
 # disable beans endpoint
 management.endpoint.beans.enabled: false
-management.endpoint.health.show-details: "ALWAYS"
+management.endpoint.health.roles: ACTUATOR
+management.endpoint.health.show-details: "when-authorized"
 management:
   health:
     consul:
@@ -134,8 +116,6 @@ management:
     ratelimiters:
       enabled: false
     circuitbreakers:
-      enabled: false
-    hystrix:
       enabled: false
     rabbit:
       enabled: false
@@ -178,9 +158,6 @@ logging:
     org.springframework.web.client: WARN
     org.springframework.ws: WARN
     sun.net.www.protocol: WARN
-    org.apache.kafka: INFO
-    javax.net.ssl: INFO
-    org.springframework.kafka: INFO
 ##################################################
 # Ribbon timeout, server refresh interval, retry
 # settings for the requests
@@ -192,52 +169,7 @@ ribbon:
   MaxAutoRetries: 2
   MaxAutoRetriesNextServer: 2
   OkToRetryOnAllOperations: true
-##################################################
-# Disable hystrix for feign. Enable it if fallback
-# needs to be implemented
-##################################################
-feign.hystrix.enabled: true
-##################################################
-# hystrix command settings
-##################################################
-hystrix:
-  # set the hystrix.shareSecurityContext property to true. Doing so will auto configure an Hystrix concurrency strategy
-  # plugin hook who will transfer the SecurityContext from your main thread to the one used by the Hystrix command
- shareSecurityContext: true
- # set the hystrix.wrappers.enabled property to true. Doing so will auto configure an Hystrix concurrency strategy
- # plugin hook who will transfer the RequestContextHolder from your main thread to the one used by the Hystrix command
- # CUSTOM property used conditionally to register bean and HystrixPlugins concurrency strategy
- wrappers.enabled: true
- command:
-  default:
-    metrics:
-      rollingStats:
-        # This property sets the duration of the statistical rolling window, in milliseconds.
-        # This is how long Hystrix keeps metrics for the circuit breaker to use and for publishing
-        # Default Value: 10000
-        timeInMilliseconds: 20000
-      # This property sets the time to wait, in milliseconds, between allowing health snapshots to be taken that calculate
-      # success and error percentages and affect circuit breaker status.
-      # Default Value: 500
-      healthSnapshot:
-        intervalInMilliseconds: 1000
-    circuitBreaker:
-      # This property sets the amount of time, after tripping the circuit, to reject requests
-      # before allowing attempts again to determine if the circuit should again be closed.
-      # Default Value: 5000
-      sleepWindowInMilliseconds: 5000
-      # This property sets the minimum number of requests in a rolling window that will trip the circuit.
-      # Default Value: 20
-      requestVolumeThreshold: 20
-    execution:
-      isolation:
-        # strategy: SEMAPHORE
-        thread:
-          # This property sets the time in milliseconds after which the caller will observe a timeout and
-          # walk away from the command execution. Hystrix marks the HystrixCommand as a TIMEOUT, and performs fallback
-          # logic. Note that there is configuration for turning off timeouts per-command, if that is desired (see command.timeout.enabled).
-          # Default Value: 1000
-          timeoutInMilliseconds: 20000
+
 ###############################################################################
 #Property configuration to enable or disable JWT security for the service calls
 #JWT security is enabled by default. So to disable it you have to
@@ -286,6 +218,8 @@ bip.framework:
 # To skip specific patterns being exported, added few more customs on top of default skip pattern
 # see org.springframework.cloud.sleuth.instrument.web.TraceFilter.DEFAULT_SKIP_PATTERN
 ##################################################
-spring.sleuth.web.skipPattern: (/api/.*/webjars.*|/api/.*/v2/api-docs.*|/api/.*/swagger-resources.*|/api/.*/swagger-ui.*|/api-docs.*|/autoconfig|/configprops|/dump|/health|/info|/metrics.*|/mappings|/trace|/swagger.*|.*\\.png|.*\\.css|.*\\.js|.*\\.html|/favicon.ico|/hystrix.stream)
+spring.sleuth.web.skipPattern: (/api/.*/webjars.*|/api/.*/v2/api-docs.*|/api/.*/swagger-resources.*|/api/.*/swagger-ui.*|/api-docs.*|/autoconfig|/configprops|/dump|/health|/info|/metrics.*|/mappings|/trace|/swagger.*|.*\\.png|.*\\.css|.*\\.js|.*\\.html|/favicon.ico)
 # comma separated list of matchers
 spring.sleuth.rxjava.schedulers.ignoredthreads: HystixMetricPoller,^RxComputation.*$,^RxIoScheduler.*$
+
+

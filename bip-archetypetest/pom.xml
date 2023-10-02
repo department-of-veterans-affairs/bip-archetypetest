@@ -18,7 +18,7 @@
 	<description>ArchetypeTest Service Implementation for BIP Project</description>
 
 	<properties>
-		<bip-framework.version>3.6.0</bip-framework.version>
+		<bip-framework.version>6.0.0</bip-framework.version>
 		<domain>localhost</domain>
 		<port>8080</port>
 		<protocol>http</protocol>
@@ -84,25 +84,23 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+		 <groupId>org.springframework.cloud</groupId>
+		 <artifactId>spring-cloud-starter-bootstrap</artifactId>
+		 <exclusions>
+			 <exclusion>
+				 <groupId>org.bouncycastle</groupId>
+				 <artifactId>bcprov-jdk15on</artifactId>
+			 </exclusion>
+		 </exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		<!-- spring cloud dependencies -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-stream-binder-rabbit</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.retry</groupId>
@@ -117,15 +115,12 @@
 			<artifactId>spring-cloud-starter-consul-config</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-consul-all</artifactId>
-			<exclusions>
-				<!-- Module spring-cloud-netflix-core is deprecated as of 2.1.0, use spring-cloud-netflix-hystrix instead. -->
-				<exclusion>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-netflix-core</artifactId>
-				</exclusion>
-			</exclusions>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-consul</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-consul-discovery</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
@@ -156,6 +151,36 @@
 		<dependency>
 			<groupId>org.openapitools</groupId>
 			<artifactId>openapi-generator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.activation</groupId>
+					<artifactId>activation</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.fge</groupId>
+					<artifactId>jackson-coreutils</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.swagger.core.v3</groupId>
+					<artifactId>swagger-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>joda-time</groupId>
+					<artifactId>joda-time</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.code.findbugs</groupId>
+					<artifactId>jsr305</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- jolokia for JMX over HTTP via /jolokia -->
@@ -177,6 +202,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+		    <groupId>org.junit.vintage</groupId>
+		    <artifactId>junit-vintage-engine</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
 			<scope>test</scope>
@@ -187,11 +217,9 @@
 			<version>${bip-framework.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- Kafka Dependencies -->
 		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -305,14 +333,13 @@
 
 									<apiPackage>gov.va.bip.archetypetest.api</apiPackage>
 									<modelPackage>gov.va.bip.archetypetest.api.model.v1</modelPackage>
-									<importMappings>
+									<schemaMappings>
 										ProviderResponse=gov.va.bip.framework.rest.provider.ProviderResponse,
 										ProviderRequest=gov.va.bip.framework.rest.provider.ProviderRequest,
 										Message=gov.va.bip.framework.rest.provider.Message,
 										Person=gov.va.bip.framework.security.model.Person,
 										ProviderTransferObjectMarker=gov.va.bip.framework.transfer.ProviderTransferObjectMarker
-									</importMappings>
-
+									</schemaMappings>
 									<addCompileSourceRoot>false</addCompileSourceRoot>
 									<configHelp>false</configHelp>
 									<verbose>false</verbose>
@@ -323,7 +350,6 @@
 									<generateModels>true</generateModels>
 									<generateModelTests>false</generateModelTests>
 									<generateModelDocumentation>false</generateModelDocumentation>
-									<generateSupportingFiles>false</generateSupportingFiles>
 									<languageSpecificPrimitives>true</languageSpecificPrimitives>
 									<templateDirectory>${basedir}/src/main/resources/openapi/mustache</templateDirectory>
 

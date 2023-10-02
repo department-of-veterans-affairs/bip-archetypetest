@@ -53,3 +53,6 @@ spring.cloud.vault:
 # https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.1-Release-Notes
 spring.main:
      allow-bean-definition-overriding: true
+management.health:
+  consul.enabled: false
+  vault.enabled: false
