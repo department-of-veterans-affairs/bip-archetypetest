@@ -3,6 +3,7 @@ package gov.va.bip.archetypetest.api.provider;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ import gov.va.bip.framework.swagger.SwaggerResponseMessages;
 import gov.va.bip.archetypetest.api.ArchetypeTestApi;
 import gov.va.bip.archetypetest.api.model.v1.SampleRequest;
 import gov.va.bip.archetypetest.api.model.v1.SampleResponse;
-import io.swagger.annotations.ApiParam;
 
 /**
  * REST Service endpoint
@@ -84,7 +84,7 @@ public class ArchetypeTestResource implements ArchetypeTestApi, SwaggerResponseM
 	 */
 	@Override
 	public ResponseEntity<SampleResponse> sampleByPid(
-			@ApiParam(value = "sampleRequest", required = true) @Valid @RequestBody final SampleRequest sampleRequest) {
+			@Parameter(description = "sampleRequest", required = true) @Valid @RequestBody final SampleRequest sampleRequest) {
 		LOGGER.debug("sampleByPid() method invoked");
 
 		SampleResponse providerResponse = serviceAdapter.sampleByPid(sampleRequest);

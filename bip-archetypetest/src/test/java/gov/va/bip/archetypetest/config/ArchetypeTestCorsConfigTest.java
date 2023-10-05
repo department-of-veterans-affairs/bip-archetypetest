@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
     properties = { "spring.cloud.bus.enabled=false", "spring.cloud.discovery.enabled=false",
         "spring.cloud.consul.enabled=false", "spring.cloud.config.discovery.enabled=false",
         "spring.cloud.vault.enabled=false", "bip.framework.security.http.cors.enabled=true",
-        "bip-archetypetest.origins=https://bip-archetypetest-ui-dev.dev8.bip.va.gov" })
+        "bip-archetypetest.origins=https://bip-archetypetest-ui-dev.dev.bip.va.gov" })
 public class ArchetypeTestCorsConfigTest extends TestCase {
 
  @Autowired

@@ -13,6 +13,8 @@ tags:
     description: ArchetypeTest Resource
   - name: token-resource
     description: Token Resource
+security:
+  - bearerAuth: []
 paths:
   "/api/v1/archetypetest/pid":
     post:
@@ -27,22 +29,22 @@ paths:
         content:
             application/json:
               schema:
-                '$ref': '#/components/schemas/SampleRequest'
+                $ref: '#/components/schemas/SampleRequest'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                '$ref': '#/components/schemas/SampleResponse'
+                $ref: '#/components/schemas/SampleResponse'
         '400':
-           '$ref': '#/components/responses/400'
+           $ref: '#/components/responses/400'
         '401':
-           '$ref': '#/components/responses/401'
+           $ref: '#/components/responses/401'
         '403':
-           '$ref': '#/components/responses/403'
+           $ref: '#/components/responses/403'
         '500':
-           '$ref': '#/components/responses/500'
+           $ref: '#/components/responses/500'
       security:
         - bearerAuth: []
       deprecated: false
@@ -68,7 +70,7 @@ paths:
         content:
             application/json:
               schema:
-                '$ref': '#/components/schemas/Person'
+                $ref: '#/components/schemas/Person'
       responses:
         '200':
           description: A Response which indicates a successful Request.  The Response
@@ -78,48 +80,19 @@ paths:
               schema:
                 type: string
         '400':
-           '$ref': '#/components/responses/400'
+           $ref: '#/components/responses/400'
         '401':
-           '$ref': '#/components/responses/401'
+           $ref: '#/components/responses/401'
         '403':
-           '$ref': '#/components/responses/403'
+           $ref: '#/components/responses/403'
         '500':
-           '$ref': '#/components/responses/500'
+           $ref: '#/components/responses/500'
       deprecated: false
-    # The token path should not require any changes
-  "/api/v1/archetypetest/getPersonFromKafka":
-    get:
-      tags:
-        - Kafka
-      summary: Get the most recent Person sent over by Kafka
-      description: Gets the most recent person that was consumed off the Kafka queue
-      operationId: getPersonFromKafka
-      responses:
-        '200':
-          description: The name of the more recent person consumed
-          content:
-            text/plain:
-              schema:
-                type: string
-        '400':
-          '$ref': '#/components/responses/400'
-        '401':
-          '$ref': '#/components/responses/401'
-        '403':
-          '$ref': '#/components/responses/403'
-        '500':
-          '$ref': '#/components/responses/500'
-      security:
-        - bearerAuth: []
-      deprecated: false
+      security: []
 components:
   # securitySchemes are defined by the framework.
   # Service applications must configure as below.
   securitySchemes:
-    Authorization:
-      type: apiKey
-      name: Authorization
-      in: header
     bearerAuth:
       type: http
       bearerFormat: JWT
@@ -146,7 +119,7 @@ components:
       title: SampleRequest
       description: Model for data to request sample information from the Service
       allOf:
-        - '$ref': '#/components/schemas/ProviderRequest'
+        - $ref: '#/components/schemas/ProviderRequest'
         - type: object
           properties:
             participantID:
@@ -162,13 +135,13 @@ components:
       title: SampleResponse
       description: Model for the sample response from the Service
       allOf:
-       - '$ref': '#/components/schemas/ProviderResponse'
+       - $ref: '#/components/schemas/ProviderResponse'
        - type: object
          # all other properties specific to SampleResponse
          properties:
             sampleInfo:
               description: The object representing the sample information
-              '$ref': '#/components/schemas/SampleInfo'
+              $ref: '#/components/schemas/SampleInfo'
     # Schema objects below are from BIP Framework to be declared.
     # These objects need to be mapped in <importMappings> section
     # of openapi-generator-maven-plugin so that no code is generated
@@ -273,15 +246,20 @@ components:
           description: The name associated with the person taking the last action on the record
     ProviderResponse:
       type: object
-      properties:
-        messages:
-          type: array
-          items:
-            '$ref': '#/components/schemas/Message'
       title: ProviderResponse
+      discriminator:
+        propertyName: '@type'
+      required:
+        - '@type'
+      allOf: []
     ProviderRequest:
       type: object
       title: ProviderRequest
+      discriminator:
+        propertyName: '@type'
+      required:
+        - '@type'
+      allOf: []
   responses:
     400:
       description: There was an error encountered processing the Request.  Response
@@ -290,7 +268,7 @@ components:
       content:
         application/problem+json:
           schema:
-            '$ref': '#/components/schemas/ProviderResponse'
+            $ref: '#/components/schemas/ProviderResponse'
           example:
               messages:
                 - key: bip.framework.global.validator.method.argument.not.valid
@@ -303,7 +281,7 @@ components:
       content:
         application/problem+json:
           schema:
-            '$ref': '#/components/schemas/ProviderResponse'
+            $ref: '#/components/schemas/ProviderResponse'
           example:
               messages:
                 - key: UNAUTHORIZED
@@ -317,7 +295,7 @@ components:
       content:
         application/problem+json:
           schema:
-            '$ref': '#/components/schemas/ProviderResponse'
+            $ref: '#/components/schemas/ProviderResponse'
           example:
               messages:
                 - key: bip.framework.not.authorized.exception
@@ -333,7 +311,7 @@ components:
       content:
         application/problem+json:
           schema:
-            '$ref': '#/components/schemas/ProviderResponse'
+            $ref: '#/components/schemas/ProviderResponse'
           example:
               messages:
                 - key: bip.framework.global.general.exception

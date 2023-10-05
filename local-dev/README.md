@@ -3,7 +3,7 @@ This local development environment is a set of docker images, and is strictly fo
 
 The local-dev folder also contains tools to assist with preparing to submit [SwA Code Reviews](../docs/fortify-and-swa.md).
 
-For information about the BIP Framework and Reference Application, see this [README](https://github.ec.va.gov/EPMO/bip-reference-person).
+For information about the BIP Framework and Reference Application, see this [README](https://github.com/department-of-veterans-affairs/bip-reference-person).
 
 ## Starting the Environment
 

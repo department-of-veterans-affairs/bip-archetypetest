@@ -9,7 +9,4 @@ opaImage:
 vault:
   host: "vault.vault"
 consul:
-  host: dev8-consul-helm-server.vault
-aws:
-  accountID: "261727212250"
-  irsaRole: "project-bip-archetypetest-dev-role"
+  host: dev-consul-helm-server.vault

@@ -1,9 +1,5 @@
 mavenGitflowPipeline {
-    
-    helmTimeout = 500
 
-    skipSonar = true
-    
     useJDK11 = true
 
     /*************************************************************************
@@ -31,7 +27,7 @@ mavenGitflowPipeline {
     // ignored, but when OPA is enabled, the subsequent line overrides the cucumberOpts to allow them to be included.
     cucumberOpts = "--tags @DEV --tags ~@securitypolicy"
 
-    cucumberOpts = "--tags @DEV"
+    // OPAEnablement cucumberOpts = "--tags @DEV"
 
     /* Postman Testing Configuration */
    
@@ -64,7 +60,7 @@ mavenGitflowPipeline {
     *************************************************************************/
 
     //Git Repository that contains your Helm chart
-    chartRepository = "https://github.ec.va.gov/EPMO/bip-archetypetest-config"
+    chartRepository = "https://github.com/department-of-veterans-affairs/bip-archetypetest-config"
 
     //Git branch to obtain Helm chart from
     chartBranch = "development"
@@ -84,4 +80,43 @@ mavenGitflowPipeline {
 
     //Release name to use
     chartReleaseName = "bip-archetypetest"
+
+    /*************************************************************************
+     * Fortify Configuration
+     *************************************************************************/
+    //Specifies the maximum amount of memory Fortify Static Code Analyzer uses. Values can be M or G (ex. 1G).
+    //fortifyMaxHeap = "1G"
+
+    //Specifies the thread stack size of JVM which runs SCA.
+    //fortifyThreadSize = "8M"
+
+    //List of properties to add to fortify-sca.properties file.
+    //fortifyScaProps = [
+    //        "com.fortify.sca.MultithreadedAnalysis = true",
+    //        "com.fortify.sca.ThreadCount = 2"
+    //]
+
+    /*************************************************************************
+     * OWASP Maven Dependency Check Configuration
+     *************************************************************************/
+    //Determines if the OWASP Dependency Check stage is executed. Defaults to true.
+    skipOwasp = true
+
+    //Determines which plugin to use for OWASP Dependency Check. Valid values are "maven" and "jenkins".
+    owaspPlugin = "jenkins"
+
+    //Determines vulnerability threshold. If number of vulnerabilities of specified severity exceed this threshold, the pipeline build will be marked as unstable.
+    unstableTotalCritical = 1
+    unstableTotalHigh = 1
+    unstableTotalMedium = 1
+    unstableTotalLow = 1
+
+    //Determines vulnerability threshold. If number of vulnerabilities of specified severity exceed this threshold, the pipeline build will fail.
+    //failedTotalCritical = 1
+    //failedTotalHigh = 1
+    //failedTotalMedium = 1
+    //failedTotalLow = 1
+
+    //String for defining Dependency Check command line arguments. See Dependency-Check-CLI documentation (https://jeremylong.github.io/DependencyCheck/dependency-check-cli/arguments.html) for a table of supported command line arguments.
+    //owaspArgs = "--suppression ./owasp-suppression.xml"
 }

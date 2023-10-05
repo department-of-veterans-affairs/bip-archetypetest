@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>gov.va.bip.framework</groupId>
 		<artifactId>bip-framework-parentpom</artifactId>
-		<version>3.6.0</version>
+		<version>6.0.0</version>
 		<relativePath />
 	</parent>
 
@@ -24,7 +24,7 @@
 		<repository>
 			<id>nexus3</id>
 			<name>BIP Nexus Repository</name>
-			<url>https://nexus.dev8.bip.va.gov/repository/maven-public</url>
+			<url>https://nexus.dev.bip.va.gov/repository/maven-public</url>
 	  	</repository>
 	</repositories>
 	
@@ -43,6 +43,33 @@
 	</properties>
 	
 	<profiles>
+		<profile>
+			<id>dependency-check</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>6.5.0</version>
+						<configuration>
+							<formats>HTML,XML</formats>
+							<!--<mavenSettingsProxyId>httpsproxy</mavenSettingsProxyId>-->
+							<suppressionFile>./owasp-suppression.xml</suppressionFile>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<!--
 			The fortify-sca profile runs the aggregate scan for all modules.
 			If a project team believes that the fortify-sca profile requires ANY changes,
@@ -127,6 +154,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
 						<!-- do not run on child modules, just on reactor -->
 						<inherited>false</inherited>
 						<dependencies>

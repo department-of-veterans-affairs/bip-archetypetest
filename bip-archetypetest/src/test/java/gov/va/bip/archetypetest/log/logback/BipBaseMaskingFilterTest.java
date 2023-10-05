@@ -7,14 +7,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.event.Level;
-import org.springframework.boot.test.rule.OutputCapture;
+import org.springframework.boot.test.system.OutputCaptureRule;
 
 import static org.junit.Assert.assertTrue;
 
 public class BipBaseMaskingFilterTest {
 
 	@Rule
-	public OutputCapture capture = new OutputCapture();
+	public OutputCaptureRule capture = new OutputCaptureRule();
 
 	class TestBipBaseMaskingFilter extends BipMaskingFilter {
 		// test class
@@ -29,7 +29,6 @@ public class BipBaseMaskingFilterTest {
 
 	@Test
 	public final void testEvaluatePattern() {
-		capture.reset();
 
 		String msg = "Test Pattern 123-456 value";
 		BipLogger logger = BipLoggerFactory.getLogger(BipMaskingFilter.class);
@@ -41,7 +40,6 @@ public class BipBaseMaskingFilterTest {
 
 	@Test
 	public final void testEvaluateDate() {
-		capture.reset();
 
 		String msg = "Test Date Pattern 1234-56-78 value";
 		BipLogger logger = BipLoggerFactory.getLogger(BipMaskingFilter.class);
